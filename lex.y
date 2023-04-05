@@ -31,6 +31,9 @@
 %left tADD tSUB
 %left tMUL tDIV
 
+%nonassoc tTHEN
+%nonassoc tELSE
+
 %%
 
 Program: Declaration_list
@@ -94,7 +97,7 @@ Expression_stmt: Expression tSEMI
                | tSEMI
                ;
 
-Selection_stmt: tIF tLPAR Expression tRPAR Statement %prec tOR {printf("If Statement\n");}
+Selection_stmt: tIF tLPAR Expression tRPAR Statement %prec tTHEN {printf("If Statement\n");}
                | tIF tLPAR Expression tRPAR Statement tELSE Statement {printf("If Else Statement\n");}
                ;
 
