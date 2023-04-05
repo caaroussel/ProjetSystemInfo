@@ -8,6 +8,6 @@ typedef struct symb{
 
 void ajoutSymb (symb a);
 void supprSymb (char* nom);
-symb recupSymb (char* nom);
+symb * recupSymb (char* nom);
 
 symb creationSymb(char* nom, int prof, char init);
