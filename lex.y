@@ -8,6 +8,7 @@
   int yylex (void);
   void yyerror (const char *);
   extern FILE * yyin;
+  extern int prof;
 }
 
 %union { 
@@ -17,11 +18,13 @@
 
 /* Define tokens */
 /* Token definitions */
-%token <s> tID
+%token <s> tID 
 %token <d> tNB
 %token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID
 %token tADD tSUB tMUL tDIV tLT tGT tNE tEQ tGE tLE tASSIGN tAND tOR tNOT
 %token tLBRACE tRBRACE tLPAR tRPAR tSEMI tCOMMA tERROR
+
+%type <d> Factor Var Expression Simple_expression Additive_expression Term
 
 /* Operator precedence */
 %left tOR
@@ -50,8 +53,8 @@ Declaration: Var_declaration
 Var_declaration: Var_declaration_mi tSEMI
                 ;
 
-Var_declaration_mi:  tINT tID {printf("Declare int variable : %s\n", $2);}
-                | tINT tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $2);}
+Var_declaration_mi:  tINT tID {printf("Declare int variable : %s\n", $2); creationSymb($2, 0);}
+                | tINT tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $2); creationSymb($2, 1);}
                 | Var_declaration_mi tCOMMA tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $3);}
                 ;
 
@@ -71,7 +74,7 @@ Param_list: Param_list tCOMMA Param
 Param: tINT tID {printf("Declare int parameter : %s\n", $2);}
      ;
 
-Compound_stmt: tLBRACE Local_declarations Statement_list Print_stmt tRBRACE
+Compound_stmt: tLBRACE {prof++;} Local_declarations Statement_list Print_stmt tRBRACE {supprProfAct(); prof--;}
              ;
 
 Local_declarations: Local_declarations Var_declaration
@@ -97,56 +100,47 @@ Expression_stmt: Expression tSEMI
                | tSEMI
                ;
 
-Selection_stmt: tIF tLPAR Expression tRPAR Statement %prec tTHEN {printf("If Statement\n");}
-               | tIF tLPAR Expression tRPAR Statement tELSE Statement {printf("If Else Statement\n");}
+Selection_stmt: tIF tLPAR Expression tRPAR Compound_stmt %prec tTHEN {printf("If Statement\n");}
+               | tIF tLPAR Expression tRPAR Compound_stmt tELSE Compound_stmt {printf("If Else Statement\n");}
                ;
 
-Iteration_stmt: tWHILE tLPAR Expression tRPAR Statement {printf("While Statement\n");}
+Iteration_stmt: tWHILE tLPAR Expression tRPAR Compound_stmt {printf("While Statement\n");}
                ;
 
 Return_stmt: tRETURN Expression tSEMI {printf("Returning a value\n");}
             | tRETURN tSEMI
             ;
 
-Expression: Var tASSIGN Expression
-          | Simple_expression
+Expression: Var tASSIGN Expression {$$ = $3;}
+          | Simple_expression {$$ = $1;}
           ;
 
-Var: tID
-   | tID tLBRACE Expression tRBRACE
+Var: tID {$$ = $1;}
+   | tID tLBRACE Expression tRBRACE {$$ = $3;}
    ;
 
-Simple_expression: Additive_expression Relop Additive_expression
-                 | Additive_expression
+Simple_expression: Additive_expression tLT Additive_expression {$$ = $1 < $3;}
+                 | Additive_expression tGT Additive_expression {$$ = $1 > $3;}
+                 | Additive_expression tLE Additive_expression {$$ = $1 <= $3;}
+                 | Additive_expression tGE Additive_expression {$$ = $1 >= $3;}
+                 | Additive_expression tEQ Additive_expression {$$ = $1 == $3;}
+                 | Additive_expression tNE Additive_expression {$$ = $1 != $3;}
+                 | Additive_expression {$$ = $1;}
                  ;
 
-Relop: tLT
-     | tGT
-     | tLE
-     | tGE
-     | tEQ
-     | tNE
-     ;
-
-Additive_expression: Additive_expression Addop Term
-                | Term
+Additive_expression: Additive_expression tADD Term {$$ = $1 + $3;}
+                | Additive_expression tSUB Term {$$ = $1 - $3;}
+                | Term {$$ = $1;}
                 ;
 
-Addop: tADD
-     | tSUB
-     ;
-
-Term: Term Mulop Factor
-    | Factor
+Term: Term tMUL Factor {$$ = $1 * $3;}
+    | Term tDIV Factor {$$ = $1 / $3;}
+    | Factor {$$ = $1;}
     ;
 
-Mulop: tMUL
-     | tDIV
-     ;
-
-Factor: tLPAR Expression tRPAR
-      | tNB
-      | Var 
+Factor: tLPAR Expression tRPAR {$$ = $2;}
+      | tNB {$$ = $1;}
+      | Var {$$ = $1;}
       | Call
       ;
 

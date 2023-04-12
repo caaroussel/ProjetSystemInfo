@@ -9,13 +9,13 @@
 symb * ts;
 symb * head;
 
-symb creationSymb(char* nom, int prof, char init)
+void creationSymb(char* nom, char init)
 {
     symb symbole;
     strcpy(symbole.nom,nom);
     symbole.prof=prof;
     symbole.init=init;
-    return symbole;
+    ajoutSymb(symbole);
 }
 
 void ajoutSymb (symb a)
@@ -100,26 +100,76 @@ symb * recupSymb(char* nom)
     return NULL;
 }
 
-int main (void){
-    symb a = creationSymb("symb1", 1, 0);
-    symb b = creationSymb("symb2", 1, 1);
-    symb c = creationSymb("symb3", 1, 1);
+void supprProfAct(){
+    symb locTS = *ts;
+    bool trouve = false;
+    while (locTS.nom != NULL && !trouve)
+    {
+        if(prof == locTS.prof){
+            printf("Symb : %s\n", locTS.nom);
+            if(locTS.prev != NULL && locTS.next != NULL){
+                locTS.prev->next = locTS.next;
+                locTS.next->prev = locTS.prev;
+                locTS = *(locTS.next);
+            }else if(locTS.prev != NULL){
+                head = locTS.prev;
+                head->next = NULL;
+                free(locTS.prev->next);
+                trouve = true;
+            }else if(locTS.next != NULL){
+                ts = locTS.next;
+                free(locTS.next->prev);
+                locTS = *(locTS.next);
+            }else{
+                ts = NULL;
+                free(ts);
+                trouve = true;
+            }
+            
+        } else{
+            if(locTS.next != NULL){
+                locTS = *(locTS.next);
+            }
+            else{
+                trouve = true;
+            }
+            printf("Symb else : %s\n", locTS.nom);
+        }
+        
+    }
+}
 
-    ajoutSymb(a);
-    ajoutSymb(b);
-    ajoutSymb(c);
+#if 0
+int main (void){
+    creationSymb("symb1", 1);
+    prof = 1;
+    creationSymb("symb2", 0);
+    creationSymb("symb3", 1);
+    creationSymb("symb4", 1);
+     creationSymb("symb7", 1);
+    prof = 2;
+    creationSymb("symb5", 1);
+    prof = 1;
+    creationSymb("symb6", 1);
+
+    supprProfAct();
 
     symb * ap = recupSymb("symb1");
-
-    supprSymb("symb2");
-
     symb * bp = recupSymb("symb2");
+    symb * cp = recupSymb("symb3");
+    symb * dp = recupSymb("symb4");
+    symb * ep = recupSymb("symb5");
+    symb * fp = recupSymb("symb6");
+    symb * gp = recupSymb("symb7");
 
-    supprSymb("symb2");
-
-    supprSymb("symb3");
-
-    recupSymb("symb3");
+    printf("Symb 1 : %p\n", ap);
+    printf("Symb 2 : %p\n", bp);
+    printf("Symb 3 : %p\n", cp);
+    printf("Symb 4 : %p\n", dp);
+    printf("Symb 5 : %p\n", ep);
+    printf("Symb 6 : %p\n", fp);
+    printf("Symb 7 : %p\n", gp);
 
     return 0;
 }
+#endif

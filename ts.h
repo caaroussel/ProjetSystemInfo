@@ -1,3 +1,5 @@
+#ifndef TS_H
+#define TS_H
 typedef struct symb{
     char nom[11];
     int prof;
@@ -6,8 +8,13 @@ typedef struct symb{
     struct symb * prev;
 } symb;
 
+int prof = 0;
+
 void ajoutSymb (symb a);
 void supprSymb (char* nom);
 symb * recupSymb (char* nom);
 
-symb creationSymb(char* nom, int prof, char init);
+void creationSymb(char* nom, char init);
+
+void supprProfAct();
+#endif
