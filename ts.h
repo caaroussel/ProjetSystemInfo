@@ -17,4 +17,8 @@ symb * recupSymb (char* nom);
 void creationSymb(char* nom, char init);
 
 void supprProfAct();
+void supprLast ();
+void modifInit(char* nom);
+int * getPreviousLast ();
+int * getLast ();
 #endif

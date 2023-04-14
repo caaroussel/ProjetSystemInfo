@@ -24,7 +24,7 @@
 %token tADD tSUB tMUL tDIV tLT tGT tNE tEQ tGE tLE tASSIGN tAND tOR tNOT
 %token tLBRACE tRBRACE tLPAR tRPAR tSEMI tCOMMA tERROR
 
-%type <d> Factor Var Expression Simple_expression Additive_expression Term
+%type <s> Var
 
 /* Operator precedence */
 %left tOR
@@ -54,8 +54,14 @@ Var_declaration: Var_declaration_mi tSEMI
                 ;
 
 Var_declaration_mi:  tINT tID {printf("Declare int variable : %s\n", $2); creationSymb($2, 0);}
-                | tINT tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $2); creationSymb($2, 1);}
-                | Var_declaration_mi tCOMMA tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $3);}
+                | tINT tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $2);
+                    supprLast();
+                    creationSymb($2,1);
+                }
+                | Var_declaration_mi tCOMMA tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $3);
+                    supprLast();
+                    creationSymb($3,1);
+                }
                 ;
 
 
@@ -71,7 +77,8 @@ Param_list: Param_list tCOMMA Param
           | Param
           ;
 
-Param: tINT tID {printf("Declare int parameter : %s\n", $2);}
+Param: tINT tID {printf("Declare int parameter : %s\n", $2); creationSymb($2,0);}
+    | /* empty */
      ;
 
 Compound_stmt: tLBRACE {prof++;} Local_declarations Statement_list Print_stmt tRBRACE {supprProfAct(); prof--;}
@@ -111,36 +118,75 @@ Return_stmt: tRETURN Expression tSEMI {printf("Returning a value\n");}
             | tRETURN tSEMI
             ;
 
-Expression: Var tASSIGN Expression {$$ = $3;}
-          | Simple_expression {$$ = $1;}
+Expression: Var tASSIGN Expression {
+                printf("J'assigne une valeur\n");
+                printf("COP %p %p\n", recupSymb($1), getLast());
+                modifInit($1);
+                supprLast();
+            }
+          | Simple_expression
           ;
 
-Var: tID {$$ = $1;}
-   | tID tLBRACE Expression tRBRACE {$$ = $3;}
-   ;
+Var: tID {$$ = $1;};
 
-Simple_expression: Additive_expression tLT Additive_expression {$$ = $1 < $3;}
-                 | Additive_expression tGT Additive_expression {$$ = $1 > $3;}
-                 | Additive_expression tLE Additive_expression {$$ = $1 <= $3;}
-                 | Additive_expression tGE Additive_expression {$$ = $1 >= $3;}
-                 | Additive_expression tEQ Additive_expression {$$ = $1 == $3;}
-                 | Additive_expression tNE Additive_expression {$$ = $1 != $3;}
-                 | Additive_expression {$$ = $1;}
+Simple_expression: Additive_expression tLT Additive_expression {
+                printf("LT %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                 | Additive_expression tGT Additive_expression {
+                printf("GT %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                 | Additive_expression tLE Additive_expression {
+                printf("LE %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                 | Additive_expression tGE Additive_expression {
+                printf("GE %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                 | Additive_expression tEQ Additive_expression {
+                printf("EQ %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                 | Additive_expression tNE Additive_expression {
+                printf("NE %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                 | Additive_expression
                  ;
 
-Additive_expression: Additive_expression tADD Term {$$ = $1 + $3;}
-                | Additive_expression tSUB Term {$$ = $1 - $3;}
-                | Term {$$ = $1;}
+Additive_expression: Additive_expression tADD Term {
+                printf("ADD %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                | Additive_expression tSUB Term {
+                printf("SUB %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+                | Term
                 ;
 
-Term: Term tMUL Factor {$$ = $1 * $3;}
-    | Term tDIV Factor {$$ = $1 / $3;}
-    | Factor {$$ = $1;}
+Term: Term tMUL Factor {
+                printf("MUL %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+    | Term tDIV Factor {
+                printf("DIV %p %p %p\n", getPreviousLast(), getPreviousLast(), getLast());
+                supprLast();
+            }
+    | Factor
     ;
 
-Factor: tLPAR Expression tRPAR {$$ = $2;}
-      | tNB {$$ = $1;}
-      | Var {$$ = $1;}
+Factor: tLPAR Expression tRPAR
+      | tNB {
+                creationSymb("_",1);
+                printf("AFC %p %d\n", getLast(), $1);
+            }
+      | Var {
+                creationSymb("_",1);
+                printf("COP %p %p\n", (int *)recupSymb($1), getLast());
+            }
       | Call
       ;
 
@@ -148,8 +194,9 @@ Call: tID tLPAR Args tRPAR {printf("Calling function : %s\n", $1);}
     ;
 
 Args: Arg_list
-    | /* empty */
+    | /* empty*/
     ;
+
 
 Arg_list: Arg_list tCOMMA Expression
         | Expression

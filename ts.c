@@ -105,8 +105,8 @@ void supprProfAct(){
     bool trouve = false;
     while (locTS.nom != NULL && !trouve)
     {
+        printf("Suppression des variables avec profondeur : %d\n", prof);
         if(prof == locTS.prof){
-            printf("Symb : %s\n", locTS.nom);
             if(locTS.prev != NULL && locTS.next != NULL){
                 locTS.prev->next = locTS.next;
                 locTS.next->prev = locTS.prev;
@@ -133,10 +133,57 @@ void supprProfAct(){
             else{
                 trouve = true;
             }
-            printf("Symb else : %s\n", locTS.nom);
         }
         
     }
+}
+
+void modifInit(char* nom)
+{
+    symb locTS = *ts;
+    bool nontrouve = false;
+    while (locTS.nom != NULL && !nontrouve)
+    {   
+        if(!strcmp(nom, locTS.nom)){
+            if(locTS.prev != NULL && locTS.next != NULL){
+                locTS.next->prev->init = 1;
+            }else if(locTS.prev != NULL){
+                locTS.prev->next->init = 1;
+            }else if(locTS.next != NULL){
+                locTS.next->prev->init = 1;
+            }else{
+                ts->init = 1;
+            }
+            nontrouve = true;
+        }
+        else{
+            if(locTS.next != NULL){
+                locTS = *(locTS.next);
+            }
+            else{
+                nontrouve = true;
+            }
+        }
+    }
+}
+
+void supprLast (){
+    symb * locTS = head->prev;
+    free(head);
+    head = locTS;
+    if(head == NULL){
+        ts = NULL;
+    }else{
+        head->next = NULL;
+    }
+}
+
+int * getLast (){
+    return (int *) head;
+}
+
+int * getPreviousLast (){
+    return (int *)head->prev;
 }
 
 #if 0
