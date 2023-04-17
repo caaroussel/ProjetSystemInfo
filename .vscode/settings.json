@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.tcc": "c",
+        "array": "c",
+        "chrono": "c",
+        "functional": "c",
+        "istream": "c",
+        "ostream": "c",
+        "ratio": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "variant": "c",
+        "tn.h": "c"
+    }
+}
