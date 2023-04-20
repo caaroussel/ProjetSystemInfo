@@ -117,9 +117,18 @@ Selection_stmt: tIF tLPAR Simple_expression tRPAR {
 } Compound_stmt {
     modifNomInstr(getLastInstrVal(), getLastInstr() + 1);
     printf("%s\n", getNameInstr(getLastInstrVal()));
-} %prec tTHEN {printf("If Statement\n");}
-               | tIF tLPAR Simple_expression tRPAR Compound_stmt tELSE Compound_stmt {printf("If Else Statement\n");}
+} Selection_stmt_suite {printf("If Statement\n");}
                ;
+
+Selection_stmt_suite : tELSE {
+    creationInstr("JMT", 0);
+    creationInstrVal(getLastInstr());
+    getLastInstrVal ();
+} Compound_stmt {
+    modifNomInstr(getLastInstrVal(), getLastInstr() + 1);
+    printf("%s\n", getNameInstr(getLastInstrVal()));
+} {printf("If Else Statement\n");}
+        | /* Empty */
 
 Iteration_stmt: tWHILE tLPAR Simple_expression tRPAR {
     creationInstr("JMF", 0);
@@ -128,7 +137,7 @@ Iteration_stmt: tWHILE tLPAR Simple_expression tRPAR {
     modifNomInstr(getLastInstrVal(), getLastInstr());
     printf("%s\n", getNameInstr(getLastInstrVal()));
     char result[120];
-    sprintf(result, "JMT %d\n", getLastInstrValIndex()+1);
+    sprintf(result, "JMT %d", getLastInstrValIndex()+1);
     creationInstr(result, 0);
 } {printf("While Statement\n");}
                ;
@@ -141,7 +150,7 @@ Expression: Var tASSIGN Expression {
                 printf("J'assigne une valeur\n");
                 printf("COP %d %d\n", recupSymb($1), getLast());
                 char result[120];
-                sprintf(result, "COP %d %d\n", recupSymb($1), getLast());
+                sprintf(result, "COP %d %d", recupSymb($1), getLast());
                 creationInstr(result, 0);
                 modifInit($1);
                 supprLast();
@@ -154,42 +163,42 @@ Var: tID {$$ = $1;};
 Simple_expression: Additive_expression tLT Additive_expression {
                 printf("LT %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "LT %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "LT %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
                  | Additive_expression tGT Additive_expression {
                 printf("GT %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "GT %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "GT %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
                  | Additive_expression tLE Additive_expression {
                 printf("LE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "LE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "LE %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
                  | Additive_expression tGE Additive_expression {
                 printf("GE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "GE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "GE %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
                  | Additive_expression tEQ Additive_expression {
                 printf("EQ %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "EQ %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "EQ %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
                  | Additive_expression tNE Additive_expression {
                 printf("NE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "NE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "NE %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
@@ -199,14 +208,14 @@ Simple_expression: Additive_expression tLT Additive_expression {
 Additive_expression: Additive_expression tADD Term {
                 printf("ADD %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[20];
-                sprintf(result, "ADD %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "ADD %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
                 | Additive_expression tSUB Term {
                 printf("SUB %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "SUB %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "SUB %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
@@ -216,14 +225,14 @@ Additive_expression: Additive_expression tADD Term {
 Term: Term tMUL Factor {
                 printf("MUL %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "MUL %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "MUL %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
     | Term tDIV Factor {
                 printf("DIV %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
-                sprintf(result, "DIV %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
+                sprintf(result, "DIV %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
                 creationInstr(result, 0);
                 supprLast();
             }
@@ -235,14 +244,14 @@ Factor: tLPAR Expression tRPAR
                 creationSymb("_",1);
                 printf("AFC %d %d\n", getLast(), $1);
                 char result[120];
-                sprintf(result, "AFC %d %d\n", getLast(), $1);
+                sprintf(result, "AFC %d %d", getLast(), $1);
                 creationInstr(result, 0);
             }
       | Var {
                 creationSymb("_",1);
                 printf("COP %d %d\n", recupSymb($1), getLast());
                 char result[120];
-                sprintf(result, "COP %d %d\n", recupSymb($1), getLast());
+                sprintf(result, "COP %d %d", recupSymb($1), getLast());
                 creationInstr(result, 0);
             }
       | Call
