@@ -4,21 +4,20 @@ typedef struct symb{
     char nom[11];
     int prof;
     char init;
+    int index;
     struct symb * next;
     struct symb * prev;
 } symb;
 
-int prof = 0;
-
 void ajoutSymb (symb a);
 void supprSymb (char* nom);
-symb * recupSymb (char* nom);
+int recupSymb (char* nom);
 
 void creationSymb(char* nom, char init);
 
 void supprProfAct();
 void supprLast ();
 void modifInit(char* nom);
-int * getPreviousLast ();
-int * getLast ();
+int getPreviousLast ();
+int getLast ();
 #endif

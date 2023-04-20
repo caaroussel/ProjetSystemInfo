@@ -7,7 +7,7 @@
 
 
 instr * ti;
-instr * head;
+instr * headTi;
 
 void creationInstr(char* nom, char type)
 {
@@ -25,16 +25,19 @@ void ajoutInstr (instr a)
         strcpy(ti->nom, a.nom);
         ti->prof = a.prof;
         ti->type = a.type;
-        head = ti;
+        ti->index = 0;
+        headTi = ti;
 
     }else{
-        head->next = malloc(sizeof(instr));
-        strcpy(head->next->nom, a.nom);
-        head->next->prof = a.prof;
-        head->next->type = a.type;
+        headTi->next = malloc(sizeof(instr));
+        strcpy(headTi->next->nom, a.nom);
+        headTi->next->prof = a.prof;
+        headTi->next->type = a.type;
+        headTi->next->index = headTi->index + 1;
 
-        head->next->prev = head;
-        head = head->next;
+        headTi->next->prev = headTi;
+        headTi = headTi->next;
+
     }
 }
 
@@ -48,8 +51,8 @@ void supprInstr (char* nom)
             if(locTI.prev != NULL && locTI.next != NULL){
                 locTI.prev->next = locTI.next;
             }else if(locTI.prev != NULL){
-                head = locTI.prev;
-                head->next = NULL;
+                headTi = locTI.prev;
+                headTi->next = NULL;
                 free(locTI.prev->next);
             }else if(locTI.next != NULL){
                 ti = locTI.next;
@@ -112,8 +115,8 @@ void supprProfActInstr(){
                 locTI.next->prev = locTI.prev;
                 locTI = *(locTI.next);
             }else if(locTI.prev != NULL){
-                head = locTI.prev;
-                head->next = NULL;
+                headTi = locTI.prev;
+                headTi->next = NULL;
                 free(locTI.prev->next);
                 trouve = true;
             }else if(locTI.next != NULL){
@@ -168,30 +171,41 @@ void modifInitInstr(char* nom)
 }
 
 void supprLastInstr (){
-    instr * locTI = head->prev;
-    free(head);
-    head = locTI;
-    if(head == NULL){
+    instr * locTI = headTi->prev;
+    free(headTi);
+    headTi = locTI;
+    if(headTi == NULL){
         ti = NULL;
     }else{
-        head->next = NULL;
+        headTi->next = NULL;
     }
 }
 
-int * getLastInstr (){
-    return (int *) head;
+instr * getLastInstr (){
+    return headTi;
 }
 
-int * getPreviousLastInstr (){
-    return (int *)head->prev;
+instr * getPreviousLastInstr (){
+    return headTi->prev;
 }
 
-void modifNomInstr(instr * a, int * nextInstr){
-    strcat(a->nom, sprintf(" %p\n", nextInstr));
+void modifNomInstr(instr * a, instr * nextInstr){
+    char result[120];
+    sprintf(result, " %d", nextInstr->index + 1);
+    strcat(a->nom, result);
 }
 
 char * getNameInstr(instr * instruction){
     return instruction->nom;
+}
+
+void afficherInstr(){
+    instr * locTI=ti;
+    while(locTI!=NULL)
+    {
+        printf("%s\n",locTI->nom);
+        locTI=locTI->next;
+    }
 }
 
 #if 0

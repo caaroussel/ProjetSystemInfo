@@ -4,6 +4,7 @@ typedef struct instr{
     char nom[11];
     int prof;
     char type;
+    int index;
     struct instr * next;
     struct instr * prev;
 } instr;
@@ -17,8 +18,9 @@ void creationInstr(char* nom, char init);
 void supprProfActInstr();
 void supprLastInstr ();
 void modifInitInstr(char* nom);
-int * getPreviousLastInstr ();
-int * getLastInstr ();
+instr * getPreviousLastInstr ();
+instr * getLastInstr ();
 char * getNameInstr(instr * instruction);
-void modifNomInstr(instr * a, int * nextInstr);
+void modifNomInstr(instr * a, instr * nextInstr);
+void afficherInstr();
 #endif

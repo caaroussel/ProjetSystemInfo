@@ -8,6 +8,7 @@
 
 symb * ts;
 symb * head;
+int prof = 0;
 
 void creationSymb(char* nom, char init)
 {
@@ -25,6 +26,7 @@ void ajoutSymb (symb a)
         strcpy(ts->nom, a.nom);
         ts->prof = a.prof;
         ts->init = a.init;
+        ts->index = 0;
         head = ts;
 
     }else{
@@ -32,7 +34,7 @@ void ajoutSymb (symb a)
         strcpy(head->next->nom, a.nom);
         head->next->prof = a.prof;
         head->next->init = a.init;
-
+        head->next->index = head->index +1;
         head->next->prev = head;
         head = head->next;
     }
@@ -71,7 +73,7 @@ void supprSymb (char* nom)
     }
 }
 
-symb * recupSymb(char* nom)
+int recupSymb(char* nom)
 {
     symb locTS = *ts;
     bool nontrouve = false;
@@ -79,13 +81,13 @@ symb * recupSymb(char* nom)
     {   
         if(!strcmp(nom, locTS.nom)){
             if(locTS.prev != NULL && locTS.next != NULL){
-                return locTS.next->prev;
+                return locTS.next->prev->index;
             }else if(locTS.prev != NULL){
-                return locTS.prev->next;
+                return locTS.prev->next->index;
             }else if(locTS.next != NULL){
-                return locTS.next->prev;
+                return locTS.next->prev->index;
             }else{
-                return ts;
+                return ts->index;
             }
         }
         else{
@@ -97,7 +99,7 @@ symb * recupSymb(char* nom)
             }
         }
     }
-    return NULL;
+    return -1;
 }
 
 void supprProfAct(){
@@ -178,12 +180,12 @@ void supprLast (){
     }
 }
 
-int * getLast (){
-    return (int *) head;
+int getLast (){
+    return head->index;
 }
 
-int * getPreviousLast (){
-    return (int *)head->prev;
+int getPreviousLast (){
+    return head->prev->index;
 }
 
 #if 0

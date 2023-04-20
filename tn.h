@@ -12,7 +12,8 @@ typedef struct instrVal{
 void ajoutInstrVal (instrVal a);
 void creationInstrVal(instr * instruction);
 void supprLastInstrVal ();
-int * getLastInstrVal ();
+instr * getLastInstrVal ();
+int getLastInstrValIndex ();
 instr * getInstr(instrVal * instructionVal);
 
 #endif

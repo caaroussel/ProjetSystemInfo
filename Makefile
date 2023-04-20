@@ -17,3 +17,6 @@ test: all
 
 testIf: all
 	echo "void main(void) {int a = 5;if (a == 3) {print(a);} }" | ./lex
+
+testWhile: all
+	echo "void main(void) {int a = 5;while (a == 3) {print(a);} }" | ./lex

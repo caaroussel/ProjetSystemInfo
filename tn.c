@@ -7,7 +7,7 @@
 
 
 instrVal * tn;
-instrVal * head;
+instrVal * headTn;
 
 void creationInstrVal(instr * instruction)
 {
@@ -21,30 +21,34 @@ void ajoutInstrVal (instrVal a)
     if(tn == NULL){
         tn = malloc(sizeof(instrVal));
         tn->pointInstr = a.pointInstr;
-        head = tn;
+        headTn = tn;
 
     }else{
-        head->next = malloc(sizeof(instrVal));
-        head->next->pointInstr = a.pointInstr;
+        headTn->next = malloc(sizeof(instrVal));
+        headTn->next->pointInstr = a.pointInstr;
 
-        head->next->prev = head;
-        head = head->next;
+        headTn->next->prev = headTn;
+        headTn = headTn->next;
     }
 }
 
 void supprLastInstrVal (){
-    instrVal * locTN = head->prev;
-    free(head);
-    head = locTN;
-    if(head == NULL){
+    instrVal * locTN = headTn->prev;
+    free(headTn);
+    headTn = locTN;
+    if(headTn == NULL){
         tn = NULL;
     }else{
-        head->next = NULL;
+        headTn->next = NULL;
     }
 }
 
-int * getLastInstrVal (){
-    return (int *) head->pointInstr;
+instr * getLastInstrVal (){
+    return headTn->pointInstr;
+}
+
+int getLastInstrValIndex (){
+    return headTn->pointInstr->index;
 }
 
 instr * getInstr(instrVal * instructionVal){
