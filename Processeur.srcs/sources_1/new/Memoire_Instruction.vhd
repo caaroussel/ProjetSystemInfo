@@ -34,7 +34,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity Memoire_Instruction is
     Port ( Sortie : out STD_LOGIC_VECTOR (31 downto 0);
            Addr : in STD_LOGIC_VECTOR (7 downto 0);
-           Clk : in STD_LOGIC);
+           CLK : in STD_LOGIC);
 end Memoire_Instruction;
 
 architecture Behavioral of Memoire_Instruction is

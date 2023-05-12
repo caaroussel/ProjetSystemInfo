@@ -33,7 +33,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Memoire_Donnee is
     Port ( 
-            Clk : in STD_LOGIC;
+            CLK : in STD_LOGIC;
             Addr : in std_logic_vector(7 downto 0);
             Data_in : in std_logic_vector(7 downto 0);
             Data_out : out std_logic_vector(7 downto 0);
@@ -48,7 +48,7 @@ architecture Behavioral of Memoire_Donnee is
 begin
     process
     begin
-        wait until Clk'Event and Clk='1';
+        wait until CLK'Event and CLK='1';
         if Write_en = '1' then
             mem(to_integer(unsigned(Addr))) <= Data_in;
         end if;
