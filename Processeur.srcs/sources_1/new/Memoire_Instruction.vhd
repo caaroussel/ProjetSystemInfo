@@ -38,8 +38,8 @@ entity Memoire_Instruction is
 end Memoire_Instruction;
 
 architecture Behavioral of Memoire_Instruction is
-    type instruction_mem_t is array (natural range <>) of std_logic_vector(7 downto 0);
-    signal mem : instruction_mem_t(0 to 1023) := (others => (others => '0'));
+    type instruction_mem_t is array (natural range <>) of std_logic_vector(31 downto 0);
+    signal mem : instruction_mem_t(0 to 1023) := (x"00112233", x"00111113", x"00222223",  others => (others => '0'));
     
 begin
 

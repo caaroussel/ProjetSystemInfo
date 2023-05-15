@@ -52,10 +52,9 @@ architecture Behavioral of BR is
 begin
     process
     begin
-        wait until A_address'Event or B_address'Event or W_address'Event or W'Event or DATA'Event or RST'Event or (CLK'Event and CLK = '1');
+        wait until (CLK'Event and CLK = '1');
         if(RST = '0') then
-            SA <= "0000";
-            SB <= "0000";
+            mem <= (others => x"00");
         else
             if(W = '1') then
                 mem(to_integer(unsigned(W_address))) <= DATA;
@@ -64,7 +63,7 @@ begin
                 SB <= mem(to_integer(unsigned(B_address)));
             end if;
         end if;
+      end process;
         QA <= SA;
         QB <= SB;
-      end process;
 end Behavioral;

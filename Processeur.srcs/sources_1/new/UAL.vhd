@@ -45,24 +45,24 @@ entity UAL is
 end UAL;
 
 architecture Behavioral of UAL is
-    signal Aux: STD_LOGIC_VECTOR (9 downto 0) := (others => '0');
+    signal Aux: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
 begin
-    process
+    process (a,b,op, Aux) is
     begin
         case op is
-            when "000" =>
-                Aux <= a + b;
             when "001" =>
-                Aux <= a - b;
+                Aux <= (b"00000000" & a) + (b"00000000" & b);
+            when "011" =>
+                Aux <= (b"00000000" & a) - (b"00000000" & b);
             when "010" =>
                 Aux <= a * b;
             when others =>
                 Aux <= (others => '0');
         end case;
-        if (Aux < x"00000000") then N<='1'; else N<='0'; end if;
-        if (Aux = x"00000000") then Z<='1'; else Z<='0'; end if;
-        if (Aux > x"111111111") then O<='1'; else O<='0'; end if;
-        if (Aux > x"11111111") then C<='1'; else C<='0'; end if;
+        if (Aux < x"0000000000000000") then N<='1'; else N<='0'; end if;
+        if (Aux = x"0000000000000000") then Z<='1'; else Z<='0'; end if;
+        if (Aux > x"0000000011111111") then O<='1'; else O<='0'; end if;
+        if (Aux > x"0000000111111111") then C<='1'; else C<='0'; end if;
         Result <= Aux(7 downto 0);
     end process;
 end Behavioral;

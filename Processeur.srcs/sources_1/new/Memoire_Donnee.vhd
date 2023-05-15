@@ -37,7 +37,8 @@ entity Memoire_Donnee is
             Addr : in std_logic_vector(7 downto 0);
             Data_in : in std_logic_vector(7 downto 0);
             Data_out : out std_logic_vector(7 downto 0);
-            Write_en : in std_logic
+            Write_en : in std_logic;
+            RST : in std_logic
          );
             
 end Memoire_Donnee;
@@ -48,11 +49,15 @@ architecture Behavioral of Memoire_Donnee is
 begin
     process
     begin
-        wait until CLK'Event and CLK='1';
-        if Write_en = '1' then
-            mem(to_integer(unsigned(Addr))) <= Data_in;
+        wait until (CLK'Event and CLK = '1');
+        if(RST = '0') then
+            mem <= (others => x"00");
+        else
+            if Write_en = '1' then
+                mem(to_integer(unsigned(Addr))) <= Data_in;
+            else
+                Data_out <= mem(to_integer(unsigned(Addr)));
+            end if;
         end if;
-        Data_out <= mem(to_integer(unsigned(Addr)));
     end process;
-
 end Behavioral;

@@ -153,14 +153,14 @@ signal re_op : STD_LOGIC_VECTOR (7 downto 0);
 
 -- Signal LC
 
-signal lc : STD_LOGIC_VECTOR (7 downto 0);
+signal lc_re : STD_LOGIC;
 
 begin
 
 pipeline_li_di : Pipeline Port map (
     A_in => li_a,
     B_in => li_b,
-    C_in => li_c,
+    C_in => "0000000",
     OP_in => li_op,
     A_out => di_a,
     B_out => di_b,
@@ -208,6 +208,8 @@ pipeline_mem_re : Pipeline Port map (
     CLK => global_CLK,
     RST => global_RST
 );
+
+lc_re <= '0' when re_op = "00000000" else '1';
 
 registers : BR Port map (
     A_address => br_A_address (3 downto 0),
