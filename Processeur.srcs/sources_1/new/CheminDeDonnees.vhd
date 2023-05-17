@@ -159,6 +159,10 @@ signal re_op : STD_LOGIC_VECTOR (7 downto 0);
 
 signal lc_re : STD_LOGIC;
 
+-- Signal MUL
+
+signal mul_di : STD_LOGIC_VECTOR (7 downto 0);
+
 begin
 
 process
@@ -182,7 +186,7 @@ pipeline_li_di : Pipeline Port map (
 
 pipeline_di_ex : Pipeline Port map (
     A_in => di_a,
-    B_in => di_b,
+    B_in => mul_di,
     C_in => di_c,
     OP_in => di_op,
     A_out => ex_a,
@@ -221,6 +225,14 @@ pipeline_mem_re : Pipeline Port map (
 
 lc_re <= '1' when re_op = "00000110"  else '0';
 
+-- MUX BR 
+
+with di_op select
+    mul_di <= di_b when "00000110",
+            br_QA when "00000101",
+            "00000000" when others;
+
+br_A_address <= di_b (3 downto 0);
 br_W_address <= re_a (3 downto 0);
 br_DATA <= re_b;
 br_W <= lc_re;

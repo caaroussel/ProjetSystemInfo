@@ -39,7 +39,7 @@ end Memoire_Instruction;
 
 architecture Behavioral of Memoire_Instruction is
     type instruction_mem_t is array (natural range <>) of std_logic_vector(31 downto 0);
-    signal mem : instruction_mem_t(0 to 1023) := (x"00000000", x"06010F00", x"0601FF00", x"06010000",  others => (others => '0'));
+    signal mem : instruction_mem_t(0 to 1023) := (x"00000000", x"06010F00", x"05020100", x"0603FF00",  others => (others => '0'));
     
 begin
 
