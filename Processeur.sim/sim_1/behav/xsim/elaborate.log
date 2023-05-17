@@ -1,6 +1,6 @@
 Vivado Simulator 2018.2
 Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: /usr/local/insa/Xilinx.VIVADO/Vivado/2018.2/bin/unwrapped/lnx64.o/xelab -wto 922e305b32c94f25a63700efb97788d6 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot Test_UAL_behav xil_defaultlib.Test_UAL -log elaborate.log 
+Running: /usr/local/insa/Xilinx.VIVADO/Vivado/2018.2/bin/unwrapped/lnx64.o/xelab -wto 922e305b32c94f25a63700efb97788d6 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot Test_donnee_AFC_behav xil_defaultlib.Test_donnee_AFC -log elaborate.log 
 Using 8 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -13,6 +13,9 @@ Compiling package ieee.std_logic_1164
 Compiling package ieee.std_logic_arith
 Compiling package ieee.std_logic_unsigned
 Compiling package ieee.numeric_std
-Compiling architecture behavioral of entity xil_defaultlib.UAL [ual_default]
-Compiling architecture behavioral of entity xil_defaultlib.test_ual
-Built simulation snapshot Test_UAL_behav
+Compiling architecture behavioral of entity xil_defaultlib.Pipeline [pipeline_default]
+Compiling architecture behavioral of entity xil_defaultlib.BR [br_default]
+Compiling architecture behavioral of entity xil_defaultlib.Memoire_Instruction [memoire_instruction_default]
+Compiling architecture behavioral of entity xil_defaultlib.CheminDeDonnees [chemindedonnees_default]
+Compiling architecture behavioral of entity xil_defaultlib.test_donnee_afc
+Built simulation snapshot Test_donnee_AFC_behav

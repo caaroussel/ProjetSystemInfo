@@ -50,9 +50,8 @@ architecture Behavioral of BR is
     signal mem : donnee_br_t(0 to 15) := (others => (others => '0'));
 
 begin
-    process
+    process (A_address, B_address, W_address, W, DATA, RST, CLK)
     begin
-        wait until (CLK'Event and CLK = '1');
         if(RST = '0') then
             mem <= (others => x"00");
         else

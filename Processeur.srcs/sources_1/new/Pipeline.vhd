@@ -46,22 +46,30 @@ entity Pipeline is
 end Pipeline;
 
 architecture Behavioral of Pipeline is
+signal S_A_out : STD_LOGIC_VECTOR (7 downto 0);
+signal S_B_out : STD_LOGIC_VECTOR (7 downto 0);
+signal S_C_out : STD_LOGIC_VECTOR (7 downto 0);
+signal S_OP_out : STD_LOGIC_VECTOR (7 downto 0);
 
 begin
     process
     begin
         wait until CLK'Event and CLK='1';
         if(RST = '0') then
-            A_out <= "00000000";
-            B_out <= "00000000";
-            C_out <= "00000000";
-            OP_out <= "00000000";
+            S_A_out <= "00000000";
+            S_B_out <= "00000000";
+            S_C_out <= "00000000";
+            S_OP_out <= "00000000";
         else
-            A_out <= A_in;
-            B_out <= B_in;
-            C_out <= C_in;
-            OP_out <= OP_in;
+            S_A_out <= A_in;
+            S_B_out <= B_in;
+            S_C_out <= C_in;
+            S_OP_out <= OP_in;
         end if;
       end process;
+      A_out <= S_A_out;
+      B_out <= S_B_out;
+      C_out <= S_C_out;
+      OP_out <= S_OP_out;
 end Behavioral;
 

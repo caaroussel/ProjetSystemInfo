@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684150578">
-  <File Type="PA-TCL" Name="Memoire_Instruction.tcl"/>
+  <File Type="ROUTE-DRC-RPX" Name="Memoire_Instruction_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="Memoire_Instruction_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR" Name="Memoire_Instruction_power_routed.rpt"/>
+  <File Type="ROUTE-PWR-SUM" Name="Memoire_Instruction_power_summary_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="Memoire_Instruction_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="Memoire_Instruction_route_status.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Memoire_Instruction_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Memoire_Instruction_postroute_physopt_bb.dcp"/>
+  <File Type="RDI-RDI" Name="Memoire_Instruction.vdi"/>
+  <File Type="BITSTR-LTX" Name="Memoire_Instruction.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="Memoire_Instruction.sysdef"/>
+  <File Type="BG-BGN" Name="Memoire_Instruction.bgn"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="ROUTE-BUS-SKEW" Name="Memoire_Instruction_bus_skew_routed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="Memoire_Instruction_postplace_pwropt.dcp"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="Memoire_Instruction_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-CTRL" Name="Memoire_Instruction_control_sets_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="Memoire_Instruction_utilization_placed.pb"/>
+  <File Type="PLACE-UTIL" Name="Memoire_Instruction_utilization_placed.rpt"/>
+  <File Type="PLACE-IO" Name="Memoire_Instruction_io_placed.rpt"/>
+  <File Type="PLACE-DCP" Name="Memoire_Instruction_placed.dcp"/>
+  <File Type="PWROPT-DCP" Name="Memoire_Instruction_pwropt.dcp"/>
+  <File Type="OPT-HWDEF" Name="Memoire_Instruction.hwdef"/>
   <File Type="ROUTE-BUS-SKEW-PB" Name="Memoire_Instruction_bus_skew_routed.pb"/>
+  <File Type="PA-TCL" Name="Memoire_Instruction.tcl"/>
+  <File Type="BITSTR-MSK" Name="Memoire_Instruction.msk"/>
+  <File Type="ROUTE-TIMING-PB" Name="Memoire_Instruction_timing_summary_routed.pb"/>
+  <File Type="PHYSOPT-DCP" Name="Memoire_Instruction_physopt.dcp"/>
+  <File Type="BITSTR-RBT" Name="Memoire_Instruction.rbt"/>
+  <File Type="ROUTE-TIMING-RPX" Name="Memoire_Instruction_timing_summary_routed.rpx"/>
   <File Type="REPORTS-TCL" Name="Memoire_Instruction_reports.tcl"/>
   <File Type="ROUTE-BUS-SKEW-RPX" Name="Memoire_Instruction_bus_skew_routed.rpx"/>
   <File Type="OPT-DCP" Name="Memoire_Instruction_opt.dcp"/>
   <File Type="OPT-DRC" Name="Memoire_Instruction_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="Memoire_Instruction.hwdef"/>
-  <File Type="PWROPT-DCP" Name="Memoire_Instruction_pwropt.dcp"/>
-  <File Type="PLACE-DCP" Name="Memoire_Instruction_placed.dcp"/>
-  <File Type="PLACE-IO" Name="Memoire_Instruction_io_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="Memoire_Instruction_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="Memoire_Instruction_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="Memoire_Instruction_control_sets_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="Memoire_Instruction_incremental_reuse_pre_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="Memoire_Instruction_postplace_pwropt.dcp"/>
-  <File Type="PHYSOPT-DCP" Name="Memoire_Instruction_physopt.dcp"/>
   <File Type="ROUTE-ERROR-DCP" Name="Memoire_Instruction_routed_error.dcp"/>
+  <File Type="BG-DRC" Name="Memoire_Instruction.drc"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="Memoire_Instruction_methodology_drc_routed.rpx"/>
   <File Type="ROUTE-DCP" Name="Memoire_Instruction_routed.dcp"/>
   <File Type="ROUTE-BLACKBOX-DCP" Name="Memoire_Instruction_routed_bb.dcp"/>
   <File Type="ROUTE-DRC" Name="Memoire_Instruction_drc_routed.rpt"/>
@@ -26,30 +46,10 @@
   <File Type="ROUTE-METHODOLOGY-DRC" Name="Memoire_Instruction_methodology_drc_routed.rpt"/>
   <File Type="BG-BIN" Name="Memoire_Instruction.bin"/>
   <File Type="ROUTE-TIMINGSUMMARY" Name="Memoire_Instruction_timing_summary_routed.rpt"/>
-  <File Type="BITSTR-MSK" Name="Memoire_Instruction.msk"/>
-  <File Type="ROUTE-TIMING-PB" Name="Memoire_Instruction_timing_summary_routed.pb"/>
-  <File Type="BITSTR-RBT" Name="Memoire_Instruction.rbt"/>
-  <File Type="ROUTE-TIMING-RPX" Name="Memoire_Instruction_timing_summary_routed.rpx"/>
   <File Type="BITSTR-NKY" Name="Memoire_Instruction.nky"/>
   <File Type="BITSTR-BMM" Name="Memoire_Instruction_bd.bmm"/>
   <File Type="ROUTE-CLK" Name="Memoire_Instruction_clock_utilization_routed.rpt"/>
-  <File Type="BG-DRC" Name="Memoire_Instruction.drc"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="Memoire_Instruction_methodology_drc_routed.rpx"/>
   <File Type="BITSTR-MMI" Name="Memoire_Instruction.mmi"/>
-  <File Type="ROUTE-BUS-SKEW" Name="Memoire_Instruction_bus_skew_routed.rpt"/>
-  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="BG-BGN" Name="Memoire_Instruction.bgn"/>
-  <File Type="BITSTR-SYSDEF" Name="Memoire_Instruction.sysdef"/>
-  <File Type="BITSTR-LTX" Name="Memoire_Instruction.ltx"/>
-  <File Type="RDI-RDI" Name="Memoire_Instruction.vdi"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="Memoire_Instruction_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="Memoire_Instruction_postroute_physopt.dcp"/>
-  <File Type="ROUTE-STATUS" Name="Memoire_Instruction_route_status.rpt"/>
-  <File Type="ROUTE-PWR-RPX" Name="Memoire_Instruction_power_routed.rpx"/>
-  <File Type="ROUTE-PWR-SUM" Name="Memoire_Instruction_power_summary_routed.pb"/>
-  <File Type="ROUTE-PWR" Name="Memoire_Instruction_power_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="Memoire_Instruction_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="Memoire_Instruction_drc_routed.rpx"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/Memoire_Instruction.vhd">

@@ -47,6 +47,10 @@ end UAL;
 architecture Behavioral of UAL is
     signal Aux: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
 begin
+    Z <= '1' when (Aux = "0000000000000000") else '0';
+    N <= Aux(7);
+    C <= Aux(8);
+    O <= '1'when Aux(15 downto 8) > 0 else '0';
     process (a,b,op, Aux) is
     begin
         case op is
@@ -59,10 +63,6 @@ begin
             when others =>
                 Aux <= (others => '0');
         end case;
-        if (Aux < x"0000000000000000") then N<='1'; else N<='0'; end if;
-        if (Aux = x"0000000000000000") then Z<='1'; else Z<='0'; end if;
-        if (Aux > x"0000000011111111") then O<='1'; else O<='0'; end if;
-        if (Aux > x"0000000111111111") then C<='1'; else C<='0'; end if;
-        Result <= Aux(7 downto 0);
+        Result <= Aux(15 downto 8);
     end process;
 end Behavioral;

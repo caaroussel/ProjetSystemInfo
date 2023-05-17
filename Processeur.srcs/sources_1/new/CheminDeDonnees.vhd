@@ -21,10 +21,11 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -75,7 +76,8 @@ Component Memoire_Donnee
         Addr : in std_logic_vector(7 downto 0);
         Data_in : in std_logic_vector(7 downto 0);
         Data_out : out std_logic_vector(7 downto 0);
-        Write_en : in std_logic
+        Write_en : in std_logic;
+        RST: in std_logic
     );
 end Component; 
 
@@ -104,9 +106,7 @@ end Component;
 
 -- Global
 
-signal global_RST : STD_LOGIC;
-signal global_CLK : STD_LOGIC;
-signal global_IP : STD_LOGIC_VECTOR (7 downto 0);
+signal global_IP : STD_LOGIC_VECTOR (7 downto 0) := (others =>  '0');
 
 -- Signal BR
 
@@ -130,16 +130,19 @@ signal ex_op : STD_LOGIC_VECTOR (7 downto 0);
 signal di_a : STD_LOGIC_VECTOR (7 downto 0);
 signal di_b : STD_LOGIC_VECTOR (7 downto 0);
 signal di_c : STD_LOGIC_VECTOR (7 downto 0);
+
+
 signal di_op : STD_LOGIC_VECTOR (7 downto 0);
 
 -- Signal Mem
 
 signal mem_a : STD_LOGIC_VECTOR (7 downto 0);
 signal mem_b : STD_LOGIC_VECTOR (7 downto 0);
+signal mem_c : STD_LOGIC_VECTOR (7 downto 0);
 signal mem_op : STD_LOGIC_VECTOR (7 downto 0);
 
 -- Signal LI
-
+signal mi_sortie : STD_LOGIC_VECTOR (31 downto 0);
 signal li_a : STD_LOGIC_VECTOR (7 downto 0);
 signal li_b : STD_LOGIC_VECTOR (7 downto 0);
 signal li_c : STD_LOGIC_VECTOR (7 downto 0);
@@ -149,6 +152,7 @@ signal li_op : STD_LOGIC_VECTOR (7 downto 0);
 
 signal re_a : STD_LOGIC_VECTOR (7 downto 0);
 signal re_b : STD_LOGIC_VECTOR (7 downto 0);
+signal re_c : STD_LOGIC_VECTOR (7 downto 0);
 signal re_op : STD_LOGIC_VECTOR (7 downto 0);
 
 -- Signal LC
@@ -157,17 +161,23 @@ signal lc_re : STD_LOGIC;
 
 begin
 
+process
+begin 
+    wait until CLK'Event and CLK='1';
+    global_IP <= (global_IP + "00000001");
+end process;
+
 pipeline_li_di : Pipeline Port map (
     A_in => li_a,
     B_in => li_b,
-    C_in => "0000000",
+    C_in => li_c,
     OP_in => li_op,
     A_out => di_a,
     B_out => di_b,
     C_out => di_c,
     OP_out => di_op,
-    CLK => global_CLK,
-    RST => global_RST
+    CLK => CLK,
+    RST => RST
 );
 
 pipeline_di_ex : Pipeline Port map (
@@ -179,58 +189,66 @@ pipeline_di_ex : Pipeline Port map (
     B_out => ex_b,
     C_out => ex_c,
     OP_out => ex_op,
-    CLK => global_CLK,
-    RST => global_RST
+    CLK => CLK,
+    RST => RST
 );
 
 pipeline_ex_mem : Pipeline Port map (
     A_in => ex_a,
     B_in => ex_b,
-    C_in => "00000000",
+    C_in => ex_c,
     OP_in => ex_op,
     A_out => mem_a,
     B_out => mem_b,
-    C_out => "00000000",
+    C_out => mem_c,
     OP_out => mem_op,
-    CLK => global_CLK,
-    RST => global_RST
+    CLK => CLK,
+    RST => RST
 );
 
 pipeline_mem_re : Pipeline Port map (
     A_in => mem_a,
     B_in => mem_b,
-    C_in => "00000000",
+    C_in => mem_c,
     OP_in => mem_op,
     A_out => re_a,
     B_out => re_b,
-    C_out => "00000000",
+    C_out => re_c,
     OP_out => re_op,
-    CLK => global_CLK,
-    RST => global_RST
+    CLK => CLK,
+    RST => RST
 );
 
-lc_re <= '0' when re_op = "00000000" else '1';
+lc_re <= '1' when re_op = "00000110"  else '0';
+
+br_W_address <= re_a (3 downto 0);
+br_DATA <= re_b;
+br_W <= lc_re;
+
+
 
 registers : BR Port map (
-    A_address => br_A_address (3 downto 0),
-    B_address => br_A_address (3 downto 0),
-    W_address => br_A_address (3 downto 0),
+    A_address => br_A_address,
+    B_address => br_B_address,
+    W_address => br_W_address,
     W => br_W,
     DATA => br_DATA,
-    CLK => global_CLK,
-    RST => global_RST,
+    CLK => CLK,
+    RST => RST,
     QA => br_QA,
     QB => br_QB
 );
 
 instructions : Memoire_Instruction Port map (
     Addr => global_IP,
-    CLK => global_CLK,
-    Sortie(31 downto 24) => li_op,
-    Sortie(23 downto 16) => li_a,
-    Sortie(15 downto 8) => li_b, 
-    Sortie(7 downto 0) => li_c
+    CLK => CLK,
+    Sortie => mi_sortie
 );
+
+li_op <= mi_sortie(31 downto 24);
+li_a <= mi_sortie(23 downto 16);
+li_b <= mi_sortie(15 downto 8);
+li_c <= mi_sortie(7 downto 0);
 		
 
 end Behavioral;
