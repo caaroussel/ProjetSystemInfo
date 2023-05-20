@@ -158,10 +158,16 @@ signal re_op : STD_LOGIC_VECTOR (7 downto 0);
 -- Signal LC
 
 signal lc_re : STD_LOGIC;
+signal lc_ex : STD_LOGIC_VECTOR (2 downto 0);
 
 -- Signal MUL
 
 signal mul_di : STD_LOGIC_VECTOR (7 downto 0);
+signal mul_ex : STD_LOGIC_VECTOR (7 downto 0);
+
+-- signal ALU
+
+signal sortie_ALU : STD_LOGIC_VECTOR (7 downto 0);
 
 begin
 
@@ -190,7 +196,7 @@ pipeline_di_ex : Pipeline Port map (
     C_in => di_c,
     OP_in => di_op,
     A_out => ex_a,
-    B_out => ex_b,
+    B_out => mul_ex,
     C_out => ex_c,
     OP_out => ex_op,
     CLK => CLK,
@@ -228,14 +234,42 @@ lc_re <= '1' when re_op = "00000110"  else '0';
 -- MUX BR 
 
 with di_op select
-    mul_di <= di_b when "00000110",
-            br_QA when "00000101",
+    mul_di <= di_b when "00000110", -- afc = "0x06"
+            br_QA when "00000101", -- cop = "0x05"
+            br_QA when "00000001", -- add = "0x01"
+            br_QA when "00000010", -- mul = "0x02"
+            br_QA when "00000011", -- sou = "0x03"
             "00000000" when others;
 
 br_A_address <= di_b (3 downto 0);
 br_W_address <= re_a (3 downto 0);
 br_DATA <= re_b;
 br_W <= lc_re;
+
+alu : UAL Port map(
+        a => ex_b,
+        b => ex_c,
+        op => lc_ex,
+        result => sortie_ALU
+        --N : out STD_LOGIC;
+        --O : out STD_LOGIC;
+        --Z : out STD_LOGIC;
+        --C : out STD_LOGIC
+);
+
+-- MUX ALU
+with ex_op select
+    mul_ex <= ex_b when "00000110", -- afc = "0x06"
+            ex_b when "00000101", -- cop = "0x05"
+            sortie_ALU when "00000001", -- add = "0x01"
+            sortie_ALU when "00000010", -- mul = "0x02"
+            sortie_ALU when "00000011", -- sou = "0x03"
+            "00000000" when others;
+   
+lc_ex<= "001" when ex_op = "00000001" else -- add
+        "010" when ex_op = "00000010" else -- mul
+        "011" when ex_op = "00000011" else -- sou
+        "111"; -- choix pas important
 
 
 

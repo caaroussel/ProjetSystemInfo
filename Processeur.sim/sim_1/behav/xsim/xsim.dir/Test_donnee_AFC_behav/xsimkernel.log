@@ -2,3 +2,6 @@ Running: xsim.dir/Test_donnee_AFC_behav/xsimk -simmode gui -wdb Test_donnee_AFC_
 Design successfully loaded
 Design Loading Memory Usage: 32720 KB (Peak: 32772 KB)
 Design Loading CPU Usage: 20 ms
+Simulation completed
+Simulation Memory Usage: 122656 KB (Peak: 179992 KB)
+Simulation CPU Usage: 20 ms
