@@ -106,7 +106,7 @@ end Component;
 
 -- Global
 
-signal global_IP : STD_LOGIC_VECTOR (7 downto 0) := (others =>  '0');
+signal global_IP : STD_LOGIC_VECTOR (7 downto 0);
 
 -- Signal BR
 
@@ -159,22 +159,32 @@ signal re_op : STD_LOGIC_VECTOR (7 downto 0);
 
 signal lc_re : STD_LOGIC;
 signal lc_ex : STD_LOGIC_VECTOR (2 downto 0);
-
+signal lc_mem : STD_LOGIC;
 -- Signal MUL
 
 signal mul_di : STD_LOGIC_VECTOR (7 downto 0);
 signal mul_ex : STD_LOGIC_VECTOR (7 downto 0);
+signal mul_mem2 : STD_LOGIC_VECTor (7 downto 0);
+signal mul_mem1 : STD_LOGIC_VECTor (7 downto 0);
 
 -- signal ALU
 
 signal sortie_ALU : STD_LOGIC_VECTOR (7 downto 0);
+
+-- signal data
+
+signal sortie_DATA : STD_LOGIC_VECTOR (7 downto 0);
 
 begin
 
 process
 begin 
     wait until CLK'Event and CLK='1';
-    global_IP <= (global_IP + "00000001");
+    if rst = '0' then
+            global_IP <= "00000000";
+    else
+        global_IP <= (global_IP + "00000001");
+        end if;
 end process;
 
 pipeline_li_di : Pipeline Port map (
@@ -218,7 +228,7 @@ pipeline_ex_mem : Pipeline Port map (
 
 pipeline_mem_re : Pipeline Port map (
     A_in => mem_a,
-    B_in => mem_b,
+    B_in => mul_mem2,
     C_in => mem_c,
     OP_in => mem_op,
     A_out => re_a,
@@ -239,6 +249,8 @@ with di_op select
             di_b when "00000001", -- add = "0x01"
             di_b when "00000010", -- mul = "0x02"
             di_b when "00000011", -- sou = "0x03"
+            di_b when "00000111", -- LOAD = "0x07"
+            di_b when "00001000", -- STORE = "0x08"
             "00000000" when others;
 
 br_A_address <= di_b (3 downto 0);
@@ -254,11 +266,37 @@ with ex_op select
             sortie_ALU when "00000001", -- add = "0x01"
             sortie_ALU when "00000010", -- mul = "0x02"
             sortie_ALU when "00000011", -- sou = "0x03"
+            ex_b when "00000111", -- LOAD = "0x07"
+            ex_b when "00001000", -- STORE = "0x08"
             "00000000" when others;
    
 lc_ex <= ex_op (2 downto 0);
 
 
+-- MUX DATA
+
+with mem_op select
+    mul_mem2 <= mem_b when "00000110", -- afc = "0x06"
+            mem_b when "00000101", -- cop = "0x05"
+            mem_b when "00000001", -- add = "0x01"
+            mem_b when "00000010", -- mul = "0x02"
+            mem_b when "00000011", -- sou = "0x03"
+            sortie_DATA when "00000111", -- LOAD = "0x07"
+            mem_b when "00001000", -- STORE = "0x08"
+            "00000000" when others;
+            
+
+with mem_op select
+    mul_mem1 <= mem_b when "00000110", -- afc = "0x06"
+            mem_b when "00000101", -- cop = "0x05"
+            mem_b when "00000001", -- add = "0x01"
+            mem_b when "00000010", -- mul = "0x02"
+            mem_b when "00000011", -- sou = "0x03"
+            mem_b when "00000111", -- LOAD = "0x07"
+            mem_a when "00001000", -- STORE = "0x08"
+            "00000000" when others;
+
+lc_mem <= '1' when mem_op = "00001000"  else '0';
 
 alu : UAL Port map(
         a => ex_b,
@@ -271,6 +309,15 @@ alu : UAL Port map(
         --C : out STD_LOGIC
 );
 
+data : Memoire_Donnee Port map (
+        CLK => CLK,
+        Addr => mul_mem1,
+        Data_in => mem_b,
+        Data_out => sortie_DATA,
+        Write_en => lc_mem,
+        RST => RST
+);
+    
 
 registers : BR Port map (
     A_address => br_A_address,
