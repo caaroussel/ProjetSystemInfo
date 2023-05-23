@@ -175,6 +175,13 @@ signal sortie_ALU : STD_LOGIC_VECTOR (7 downto 0);
 
 signal sortie_DATA : STD_LOGIC_VECTOR (7 downto 0);
 
+-- signal aléa
+
+signal read_li : STD_LOGIC;
+signal write_di : STD_LOGIC;
+signal write_ex : STD_LOGIC;
+signal alea_di : STD_LOGIC;
+
 begin
 
 process
@@ -342,5 +349,14 @@ li_a <= mi_sortie(23 downto 16);
 li_b <= mi_sortie(15 downto 8);
 li_c <= mi_sortie(7 downto 0);
 		
+
+-- détection aléa
+
+read_li <= '1' when li_op="00000101" else '0';
+
+write_di <= '0' when di_op="00001000" else '1';
+write_ex <= '0' when ex_op="00001000" else '1';
+
+alea_di <= '1' when ((read_li='1' and write_di='1') and (li_a = di_b or li_a=di_c)) or ((read_li='1' and write_ex='1') and (li_a = ex_b or li_a=ex_c));
 
 end Behavioral;
