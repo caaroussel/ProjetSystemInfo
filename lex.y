@@ -56,20 +56,34 @@ Declaration: Var_declaration
 Var_declaration: Var_declaration_mi tSEMI
                 ;
 
-Var_declaration_mi:  tINT tID {printf("Declare int variable : %s\n", $2); creationSymb($2, 0);}
-                | tINT tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $2);
+Var_declaration_mi:  tINT tID {
+                    printf("Declare int variable : %s\n", $2); 
+                    creationSymb($2, 0);
+                }
+                | Var_declaration_mi tCOMMA tID {
+                    printf("Declare and assign an int value to : %s\n", $3);
+                    supprLast();
+                    creationSymb($3,1);
+                }
+                | tINT tID tASSIGN Expression {
+                    printf("Declare and assign an int value to : %s\n", $2);
                     supprLast();
                     creationSymb($2,1);
                 }
-                | Var_declaration_mi tCOMMA tID tASSIGN Expression {printf("Declare and assign an int value to : %s\n", $3);
+                | Var_declaration_mi tCOMMA tID tASSIGN Expression {
+                    printf("Declare and assign an int value to : %s\n", $3);
                     supprLast();
                     creationSymb($3,1);
                 }
                 ;
 
 
-Fun_declaration: tVOID tID tLPAR Params tRPAR Compound_stmt {printf("Declare void function : %s\n", $2);}
-                | tINT tID tLPAR Params tRPAR Compound_stmt {printf("Declare int function : %s\n", $2);}
+Fun_declaration: tVOID tID tLPAR Params tRPAR Compound_stmt {
+                    printf("Declare void function : %s\n", $2);
+                }
+                | tINT tID tLPAR Params tRPAR Compound_stmt {
+                    printf("Declare int function : %s\n", $2);
+                }
                 ;
 
 Params: tVOID
@@ -80,7 +94,9 @@ Param_list: Param_list tCOMMA Param
           | Param
           ;
 
-Param: tINT tID {printf("Declare int parameter : %s\n", $2); creationSymb($2,0);}
+Param: tINT tID {
+        printf("Declare int parameter : %s\n", $2); creationSymb($2,0);
+    }
     | /* empty */
      ;
 
@@ -95,7 +111,9 @@ Statement_list: Statement_list Statement
               | /* empty */
               ;
 
-Print_stmt: tPRINT Simple_expression tSEMI {printf("Printing a value\n");}
+Print_stmt: tPRINT Simple_expression tSEMI {
+                printf("Printing a value\n");
+            }
             | /* empty */
             ;
 
@@ -117,7 +135,9 @@ Selection_stmt: tIF tLPAR Simple_expression tRPAR {
 } Compound_stmt {
     modifNomInstr(getLastInstrVal(), getLastInstr() + 1);
     printf("%s\n", getNameInstr(getLastInstrVal()));
-} Selection_stmt_suite {printf("If Statement\n");}
+} Selection_stmt_suite {
+            printf("If Statement\n");
+        }
                ;
 
 Selection_stmt_suite : tELSE {
@@ -127,7 +147,9 @@ Selection_stmt_suite : tELSE {
 } Compound_stmt {
     modifNomInstr(getLastInstrVal(), getLastInstr() + 1);
     printf("%s\n", getNameInstr(getLastInstrVal()));
-} {printf("If Else Statement\n");}
+} {
+    printf("If Else Statement\n");
+}
         | /* Empty */
 
 Iteration_stmt: tWHILE tLPAR Simple_expression tRPAR {
@@ -139,10 +161,14 @@ Iteration_stmt: tWHILE tLPAR Simple_expression tRPAR {
     char result[120];
     sprintf(result, "JMT %d", getLastInstrValIndex()+1);
     creationInstr(result, 0);
-} {printf("While Statement\n");}
+} {
+    printf("While Statement\n");
+}
                ;
 
-Return_stmt: tRETURN Expression tSEMI {printf("Returning a value\n");}
+Return_stmt: tRETURN Expression tSEMI {
+    printf("Returning a value\n");
+}
             | tRETURN tSEMI
             ;
 
@@ -249,15 +275,17 @@ Factor: tLPAR Expression tRPAR
             }
       | Var {
                 creationSymb("_",1);
-                printf("COP %d %d\n", recupSymb($1), getLast());
+                printf("COP %d %d\n", getLast(), recupSymb($1));
                 char result[120];
-                sprintf(result, "COP %d %d", recupSymb($1), getLast());
+                sprintf(result, "COP %d %d", getLast(), recupSymb($1));
                 creationInstr(result, 0);
             }
       | Call
       ;
 
-Call: tID tLPAR Args tRPAR {printf("Calling function : %s\n", $1);}
+Call: tID tLPAR Args tRPAR {
+        printf("Calling function : %s\n", $1);
+    }
     ;
 
 Args: Arg_list
@@ -285,9 +313,11 @@ int main(int argc, char **argv) {
         }
         yyin = file;
         yyparse();
+        writeInFile("output");
         fclose(file);
     } else{
         yyparse();
+        writeInFile("output");
         afficherInstr();
     }
     return 0;

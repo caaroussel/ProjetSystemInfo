@@ -4,3 +4,5 @@ lex.output
 lex.yy.c
 lex
 ts
+output
+output.Instr

@@ -208,6 +208,24 @@ void afficherInstr(){
     }
 }
 
+void writeInFile(char * nom){
+    FILE* file;
+    file=fopen(nom,"w");
+    if (!file)
+    {
+        printf("Writting to the file");
+        fprintf(stderr, "Error : Opening file %s is not possible\n",nom);
+    }
+    instr * locTI=ti;
+    while(locTI!=NULL)
+    {
+        fprintf(file,"%s",locTI->nom);
+        locTI=locTI->next;
+        fprintf(file,"\n");
+    }
+    fclose(file);
+}
+
 #if 0
 int main (void){
     creationInstr("instr1", 1);
