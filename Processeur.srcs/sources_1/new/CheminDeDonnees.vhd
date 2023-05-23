@@ -196,7 +196,7 @@ pipeline_di_ex : Pipeline Port map (
     C_in => di_c,
     OP_in => di_op,
     A_out => ex_a,
-    B_out => mul_ex,
+    B_out => ex_b,
     C_out => ex_c,
     OP_out => ex_op,
     CLK => CLK,
@@ -205,7 +205,7 @@ pipeline_di_ex : Pipeline Port map (
 
 pipeline_ex_mem : Pipeline Port map (
     A_in => ex_a,
-    B_in => ex_b,
+    B_in => mul_ex,
     C_in => ex_c,
     OP_in => ex_op,
     A_out => mem_a,
@@ -236,15 +236,29 @@ lc_re <= '1' when re_op = "00000110"  else '0';
 with di_op select
     mul_di <= di_b when "00000110", -- afc = "0x06"
             br_QA when "00000101", -- cop = "0x05"
-            br_QA when "00000001", -- add = "0x01"
-            br_QA when "00000010", -- mul = "0x02"
-            br_QA when "00000011", -- sou = "0x03"
+            di_b when "00000001", -- add = "0x01"
+            di_b when "00000010", -- mul = "0x02"
+            di_b when "00000011", -- sou = "0x03"
             "00000000" when others;
 
 br_A_address <= di_b (3 downto 0);
 br_W_address <= re_a (3 downto 0);
 br_DATA <= re_b;
 br_W <= lc_re;
+
+
+-- MUX ALU
+with ex_op select
+    mul_ex <= ex_b when "00000110", -- afc = "0x06"
+            ex_b when "00000101", -- cop = "0x05"
+            sortie_ALU when "00000001", -- add = "0x01"
+            sortie_ALU when "00000010", -- mul = "0x02"
+            sortie_ALU when "00000011", -- sou = "0x03"
+            "00000000" when others;
+   
+lc_ex <= ex_op (2 downto 0);
+
+
 
 alu : UAL Port map(
         a => ex_b,
@@ -256,21 +270,6 @@ alu : UAL Port map(
         --Z : out STD_LOGIC;
         --C : out STD_LOGIC
 );
-
--- MUX ALU
-with ex_op select
-    mul_ex <= ex_b when "00000110", -- afc = "0x06"
-            ex_b when "00000101", -- cop = "0x05"
-            sortie_ALU when "00000001", -- add = "0x01"
-            sortie_ALU when "00000010", -- mul = "0x02"
-            sortie_ALU when "00000011", -- sou = "0x03"
-            "00000000" when others;
-   
-lc_ex<= "001" when ex_op = "00000001" else -- add
-        "010" when ex_op = "00000010" else -- mul
-        "011" when ex_op = "00000011" else -- sou
-        "111"; -- choix pas important
-
 
 
 registers : BR Port map (

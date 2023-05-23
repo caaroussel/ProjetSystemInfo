@@ -63,6 +63,6 @@ begin
             when others =>
                 Aux <= (others => '0');
         end case;
-        Result <= Aux(15 downto 8);
+        Result <= Aux(7 downto 0);
     end process;
 end Behavioral;
