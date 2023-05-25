@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684150578">
-  <File Type="RDS-RDS" Name="Memoire_Instruction.vds"/>
   <File Type="RDS-DCP" Name="Memoire_Instruction.dcp"/>
   <File Type="PA-TCL" Name="Memoire_Instruction.tcl"/>
+  <File Type="RDS-RDS" Name="Memoire_Instruction.vds"/>
   <File Type="REPORTS-TCL" Name="Memoire_Instruction_reports.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>

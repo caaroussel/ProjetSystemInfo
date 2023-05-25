@@ -41,6 +41,7 @@ entity Pipeline is
         B_out : out STD_LOGIC_VECTOR (7 downto 0);
         C_out : out STD_LOGIC_VECTOR (7 downto 0);
         OP_out : out STD_LOGIC_VECTOR (7 downto 0);
+        Disable : in STD_LOGIC;
         CLK : in STD_LOGIC;
         RST : in STD_LOGIC);
 end Pipeline;
@@ -55,7 +56,7 @@ begin
     process
     begin
         wait until CLK'Event and CLK='1';
-        if(RST = '0') then
+        if(RST = '0' or Disable = '1') then
             S_A_out <= "00000000";
             S_B_out <= "00000000";
             S_C_out <= "00000000";

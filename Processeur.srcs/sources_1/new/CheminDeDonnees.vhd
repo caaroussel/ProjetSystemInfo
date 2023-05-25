@@ -99,6 +99,7 @@ Component Pipeline
         B_out : out STD_LOGIC_VECTOR (7 downto 0);
         C_out : out STD_LOGIC_VECTOR (7 downto 0);
         OP_out : out STD_LOGIC_VECTOR (7 downto 0);
+        Disable : in STD_LOGIC;
         CLK : in STD_LOGIC;
         RST : in STD_LOGIC
     );
@@ -177,10 +178,15 @@ signal sortie_DATA : STD_LOGIC_VECTOR (7 downto 0);
 
 -- signal aléa
 
-signal read_li : STD_LOGIC;
+signal read_li : STD_LOGIC :='0';
 signal write_di : STD_LOGIC;
 signal write_ex : STD_LOGIC;
-signal alea_di : STD_LOGIC;
+signal alea_di : STD_LOGIC :='0';
+signal alea_ex : STD_LOGIC :='0';
+signal ALEA : STD_LOGIC :='0';
+
+signal Gestion_ALEA : STD_LOGIC := '0';
+signal count_CLK : STD_LOGIC_VECTOR (1 downto 0):="00";
 
 begin
 
@@ -189,10 +195,29 @@ begin
     wait until CLK'Event and CLK='1';
     if rst = '0' then
             global_IP <= "00000000";
-    else
+    elsif Gestion_ALEA ='0' then
         global_IP <= (global_IP + "00000001");
-        end if;
+    end if;
 end process;
+
+process
+begin 
+    wait until CLK'Event and CLK='1';
+    if ALEA = '1' and alea_di='1' then
+        --Gestion_ALEA <= '1';
+        count_CLK<="10";
+    elsif ALEA = '1' and alea_ex='1' then
+        --Gestion_ALEA <= '1';
+        count_CLK<="01";
+    end if;
+    if count_CLK="00" then
+        --Gestion_ALEA <='0';
+    else
+        count_CLK <= (count_CLK - "01");
+    end if;
+end process;
+        
+Gestion_ALEA <= '1' when ALEA = '1' or count_CLK/="00" else '0';  
 
 pipeline_li_di : Pipeline Port map (
     A_in => li_a,
@@ -203,6 +228,7 @@ pipeline_li_di : Pipeline Port map (
     B_out => di_b,
     C_out => di_c,
     OP_out => di_op,
+    Disable => Gestion_ALEA,
     CLK => CLK,
     RST => RST
 );
@@ -216,6 +242,7 @@ pipeline_di_ex : Pipeline Port map (
     B_out => ex_b,
     C_out => ex_c,
     OP_out => ex_op,
+    Disable => '0',
     CLK => CLK,
     RST => RST
 );
@@ -229,6 +256,7 @@ pipeline_ex_mem : Pipeline Port map (
     B_out => mem_b,
     C_out => mem_c,
     OP_out => mem_op,
+    Disable => '0',
     CLK => CLK,
     RST => RST
 );
@@ -242,11 +270,12 @@ pipeline_mem_re : Pipeline Port map (
     B_out => re_b,
     C_out => re_c,
     OP_out => re_op,
+    Disable => '0',
     CLK => CLK,
     RST => RST
 );
 
-lc_re <= '1' when re_op = "00000110"  else '0';
+lc_re <= '1' when re_op = "00000110" or re_op = "00000101" or re_op = "00000111" or re_op = "00000001" or re_op = "00000010" or re_op = "00000011" else '0';
 
 -- MUX BR 
 
@@ -356,7 +385,9 @@ read_li <= '1' when li_op="00000101" else '0';
 
 write_di <= '0' when di_op="00001000" else '1';
 write_ex <= '0' when ex_op="00001000" else '1';
+alea_di <= '1' when ((read_li='1' and write_di='1') and (li_b = di_a or li_c=di_a)) else '0';
+alea_ex <= '1' when ((read_li='1' and write_ex='1') and (li_b = ex_a or li_c=ex_a)) else '0';
 
-alea_di <= '1' when ((read_li='1' and write_di='1') and (li_a = di_b or li_a=di_c)) or ((read_li='1' and write_ex='1') and (li_a = ex_b or li_a=ex_c));
+ALEA <= '1' when alea_di='1' or alea_ex='1' else '0';
 
 end Behavioral;
