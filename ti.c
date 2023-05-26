@@ -5,97 +5,119 @@
 #include <stdbool.h>
 #include "ti.h"
 
+instr *ti;
+instr *headTi;
 
-instr * ti;
-instr * headTi;
-
-void creationInstr(char* nom, char type)
+void creationInstr(char *nom, char type, int ajoutIndex)
 {
     instr instruction;
     strcpy(instruction.nom, nom);
-    instruction.prof=prof;
-    instruction.type=type;
-    ajoutInstr(instruction);
+    instruction.prof = prof;
+    instruction.type = type;
+    ajoutInstr(instruction, ajoutIndex);
 }
 
-void ajoutInstr (instr a)
+void ajoutInstr(instr a, int ajoutIndex)
 {
-    if(ti == NULL){
+    if (ti == NULL)
+    {
         ti = malloc(sizeof(instr));
         strcpy(ti->nom, a.nom);
         ti->prof = a.prof;
         ti->type = a.type;
-        ti->index = 0;
+        ti->index = 0 + ajoutIndex;
         headTi = ti;
-
-    }else{
+    }
+    else
+    {
         headTi->next = malloc(sizeof(instr));
         strcpy(headTi->next->nom, a.nom);
         headTi->next->prof = a.prof;
         headTi->next->type = a.type;
-        headTi->next->index = headTi->index + 1;
+        headTi->next->index = headTi->index + 1 + ajoutIndex;
 
         headTi->next->prev = headTi;
         headTi = headTi->next;
-
     }
 }
 
-void supprInstr (char* nom)
+void supprInstr(char *nom)
 {
     instr locTI = *ti;
     bool trouve = false;
     while (locTI.nom != NULL && !trouve)
     {
-        if(!strcmp(nom, locTI.nom)){
-            if(locTI.prev != NULL && locTI.next != NULL){
+        if (!strcmp(nom, locTI.nom))
+        {
+            if (locTI.prev != NULL && locTI.next != NULL)
+            {
                 locTI.prev->next = locTI.next;
-            }else if(locTI.prev != NULL){
+            }
+            else if (locTI.prev != NULL)
+            {
                 headTi = locTI.prev;
                 headTi->next = NULL;
                 free(locTI.prev->next);
-            }else if(locTI.next != NULL){
+            }
+            else if (locTI.next != NULL)
+            {
                 ti = locTI.next;
                 free(locTI.next->prev);
-            }else{
+            }
+            else
+            {
                 ti = NULL;
                 free(ti);
             }
-            trouve=true;
+            trouve = true;
         }
-        else{
-            if(locTI.next != NULL){
+        else
+        {
+            if (locTI.next != NULL)
+            {
                 locTI = *(locTI.next);
             }
-            else{
+            else
+            {
                 trouve = true;
             }
         }
     }
 }
 
-instr * recupInstr(char* nom)
+instr *recupInstr(char *nom)
 {
     instr locTI = *ti;
     bool nontrouve = false;
     while (locTI.nom != NULL && !nontrouve)
-    {   
-        if(!strcmp(nom, locTI.nom)){
-            if(locTI.prev != NULL && locTI.next != NULL){
+    {
+        if (!strcmp(nom, locTI.nom))
+        {
+            if (locTI.prev != NULL && locTI.next != NULL)
+            {
                 return locTI.next->prev;
-            }else if(locTI.prev != NULL){
+            }
+            else if (locTI.prev != NULL)
+            {
                 return locTI.prev->next;
-            }else if(locTI.next != NULL){
+            }
+            else if (locTI.next != NULL)
+            {
                 return locTI.next->prev;
-            }else{
+            }
+            else
+            {
                 return ti;
             }
         }
-        else{
-            if(locTI.next != NULL){
+        else
+        {
+            if (locTI.next != NULL)
+            {
                 locTI = *(locTI.next);
             }
-            else{
+            else
+            {
                 nontrouve = true;
             }
         }
@@ -103,125 +125,165 @@ instr * recupInstr(char* nom)
     return NULL;
 }
 
-void supprProfActInstr(){
+void supprProfActInstr()
+{
     instr locTI = *ti;
     bool trouve = false;
     while (locTI.nom != NULL && !trouve)
     {
         printf("Suppression des variables avec profondeur : %d\n", prof);
-        if(prof == locTI.prof){
-            if(locTI.prev != NULL && locTI.next != NULL){
+        if (prof == locTI.prof)
+        {
+            if (locTI.prev != NULL && locTI.next != NULL)
+            {
                 locTI.prev->next = locTI.next;
                 locTI.next->prev = locTI.prev;
                 locTI = *(locTI.next);
-            }else if(locTI.prev != NULL){
+            }
+            else if (locTI.prev != NULL)
+            {
                 headTi = locTI.prev;
                 headTi->next = NULL;
                 free(locTI.prev->next);
                 trouve = true;
-            }else if(locTI.next != NULL){
+            }
+            else if (locTI.next != NULL)
+            {
                 ti = locTI.next;
                 free(locTI.next->prev);
                 locTI = *(locTI.next);
-            }else{
+            }
+            else
+            {
                 ti = NULL;
                 free(ti);
                 trouve = true;
             }
-            
-        } else{
-            if(locTI.next != NULL){
+        }
+        else
+        {
+            if (locTI.next != NULL)
+            {
                 locTI = *(locTI.next);
             }
-            else{
+            else
+            {
                 trouve = true;
             }
         }
-        
     }
 }
 
-void modifInitInstr(char* nom)
+void modifInitInstr(char *nom)
 {
     instr locTI = *ti;
     bool nontrouve = false;
     while (locTI.nom != NULL && !nontrouve)
-    {   
-        if(!strcmp(nom, locTI.nom)){
-            if(locTI.prev != NULL && locTI.next != NULL){
+    {
+        if (!strcmp(nom, locTI.nom))
+        {
+            if (locTI.prev != NULL && locTI.next != NULL)
+            {
                 locTI.next->prev->type = 1;
-            }else if(locTI.prev != NULL){
+            }
+            else if (locTI.prev != NULL)
+            {
                 locTI.prev->next->type = 1;
-            }else if(locTI.next != NULL){
+            }
+            else if (locTI.next != NULL)
+            {
                 locTI.next->prev->type = 1;
-            }else{
+            }
+            else
+            {
                 ti->type = 1;
             }
             nontrouve = true;
         }
-        else{
-            if(locTI.next != NULL){
+        else
+        {
+            if (locTI.next != NULL)
+            {
                 locTI = *(locTI.next);
             }
-            else{
+            else
+            {
                 nontrouve = true;
             }
         }
     }
 }
 
-void supprLastInstr (){
-    instr * locTI = headTi->prev;
+void supprLastInstr()
+{
+    instr *locTI = headTi->prev;
     free(headTi);
     headTi = locTI;
-    if(headTi == NULL){
+    if (headTi == NULL)
+    {
         ti = NULL;
-    }else{
+    }
+    else
+    {
         headTi->next = NULL;
     }
 }
 
-instr * getLastInstr (){
+instr *getLastInstr()
+{
     return headTi;
 }
 
-instr * getPreviousLastInstr (){
+instr *getPreviousLastInstr()
+{
     return headTi->prev;
 }
 
-void modifNomInstr(instr * a, instr * nextInstr){
+void modifNomInstr(instr *a, instr *nextInstr, int type)
+{
     char result[120];
-    sprintf(result, " %d", nextInstr->index + 1);
+    if (type == 0)
+    {
+        sprintf(result, " %d", nextInstr->index + 2);
+    }
+    else
+    {
+        sprintf(result, " %d", nextInstr->index + 1);
+    }
+    printf("Voici l'instruction suivante => %s\n", nextInstr->nom);
     strcat(a->nom, result);
 }
 
-char * getNameInstr(instr * instruction){
+char *getNameInstr(instr *instruction)
+{
     return instruction->nom;
 }
 
-void afficherInstr(){
-    instr * locTI=ti;
-    while(locTI!=NULL)
+void afficherInstr()
+{
+    instr *locTI = ti;
+    while (locTI != NULL)
     {
-        printf("%s\n",locTI->nom);
-        locTI=locTI->next;
+        printf("%s\n", locTI->nom);
+        locTI = locTI->next;
     }
 }
 
-void writeInFile(char * nom){
-    FILE* file;
-    file=fopen(nom,"w");
+void writeInFile(char *nom)
+{
+    FILE *file;
+    file = fopen(nom, "w");
     if (!file)
     {
         printf("Writting to the file");
-        fprintf(stderr, "Error : Opening file %s is not possible\n",nom);
+        fprintf(stderr, "Error : Opening file %s is not possible\n", nom);
     }
-    instr * locTI=ti;
-    while(locTI!=NULL)
+    instr *locTI = ti;
+    while (locTI != NULL)
     {
-        fprintf(file,"%s",locTI->nom);
-        locTI=locTI->next;
-        fprintf(file,"\n");
+        fprintf(file, "%s", locTI->nom);
+        locTI = locTI->next;
+        fprintf(file, "\n");
     }
     fclose(file);
 }

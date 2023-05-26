@@ -11,7 +11,7 @@ typedef struct symb{
 
 void ajoutSymb (symb a);
 void supprSymb (char* nom);
-int recupSymb (char* nom);
+int recupSymb (char* nom, int prof);
 
 void creationSymb(char* nom, char init);
 

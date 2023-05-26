@@ -11,16 +11,16 @@ typedef struct instr{
 
 extern int prof;
 
-void ajoutInstr (instr a);
+void ajoutInstr (instr a, int ajoutIndex);
 void supprInstr (char* nom);
 instr * recupInstr (char* nom);
-void creationInstr(char* nom, char init);
+void creationInstr(char* nom, char init, int ajoutIndex);
 void supprProfActInstr();
 void supprLastInstr ();
 void modifInitInstr(char* nom);
 instr * getPreviousLastInstr ();
 instr * getLastInstr ();
 char * getNameInstr(instr * instruction);
-void modifNomInstr(instr * a, instr * nextInstr);
+void modifNomInstr(instr * a, instr * nextInstr, int type);
 void afficherInstr();
 #endif

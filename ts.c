@@ -5,186 +5,244 @@
 #include <stdbool.h>
 #include "ts.h"
 
-
-symb * ts;
-symb * head;
+symb *ts;
+symb *head;
 int prof = 0;
 
-void creationSymb(char* nom, char init)
+void creationSymb(char *nom, char init)
 {
     symb symbole;
-    strcpy(symbole.nom,nom);
-    symbole.prof=prof;
-    symbole.init=init;
+    strcpy(symbole.nom, nom);
+    symbole.prof = prof;
+    symbole.init = init;
     ajoutSymb(symbole);
 }
 
-void ajoutSymb (symb a)
+void ajoutSymb(symb a)
 {
-    if(ts == NULL){
+    if (ts == NULL)
+    {
         ts = malloc(sizeof(symb));
         strcpy(ts->nom, a.nom);
         ts->prof = a.prof;
         ts->init = a.init;
         ts->index = 0;
         head = ts;
-
-    }else{
+    }
+    else
+    {
         head->next = malloc(sizeof(symb));
         strcpy(head->next->nom, a.nom);
         head->next->prof = a.prof;
         head->next->init = a.init;
-        head->next->index = head->index +1;
+        head->next->index = head->index + 1;
         head->next->prev = head;
         head = head->next;
     }
 }
 
-void supprSymb (char* nom)
+void supprSymb(char *nom)
 {
     symb locTS = *ts;
     bool trouve = false;
     while (locTS.nom != NULL && !trouve)
     {
-        if(!strcmp(nom, locTS.nom)){
-            if(locTS.prev != NULL && locTS.next != NULL){
+        if (!strcmp(nom, locTS.nom) && prof == locTS.prof)
+        {
+            if (locTS.prev != NULL && locTS.next != NULL)
+            {
                 locTS.prev->next = locTS.next;
-            }else if(locTS.prev != NULL){
+            }
+            else if (locTS.prev != NULL)
+            {
                 head = locTS.prev;
                 head->next = NULL;
                 free(locTS.prev->next);
-            }else if(locTS.next != NULL){
+            }
+            else if (locTS.next != NULL)
+            {
                 ts = locTS.next;
                 free(locTS.next->prev);
-            }else{
+            }
+            else
+            {
                 ts = NULL;
                 free(ts);
             }
-            trouve=true;
+            trouve = true;
         }
-        else{
-            if(locTS.next != NULL){
+        else
+        {
+            if (locTS.next != NULL)
+            {
                 locTS = *(locTS.next);
             }
-            else{
+            else
+            {
                 trouve = true;
             }
         }
     }
 }
 
-int recupSymb(char* nom)
+int recupSymb(char *nom, int prof)
 {
     symb locTS = *ts;
     bool nontrouve = false;
-    while (locTS.nom != NULL && !nontrouve)
-    {   
-        if(!strcmp(nom, locTS.nom)){
-            if(locTS.prev != NULL && locTS.next != NULL){
-                return locTS.next->prev->index;
-            }else if(locTS.prev != NULL){
-                return locTS.prev->next->index;
-            }else if(locTS.next != NULL){
-                return locTS.next->prev->index;
-            }else{
-                return ts->index;
+    int profActu = prof;
+    while (profActu >= 0)
+    {
+        while (locTS.nom != NULL && !nontrouve)
+        {
+            if (!strcmp(nom, locTS.nom) && profActu == locTS.prof)
+            {
+                if (locTS.prev != NULL && locTS.next != NULL)
+                {
+                    return locTS.next->prev->index;
+                }
+                else if (locTS.prev != NULL)
+                {
+                    return locTS.prev->next->index;
+                }
+                else if (locTS.next != NULL)
+                {
+                    return locTS.next->prev->index;
+                }
+                else
+                {
+                    return ts->index;
+                }
+            }
+            else
+            {
+                if (locTS.next != NULL)
+                {
+                    locTS = *(locTS.next);
+                }
+                else
+                {
+                    nontrouve = true;
+                }
             }
         }
-        else{
-            if(locTS.next != NULL){
-                locTS = *(locTS.next);
-            }
-            else{
-                nontrouve = true;
-            }
-        }
+        locTS = *ts;
+        nontrouve = false;
+        profActu = profActu - 1;
     }
     return -1;
 }
 
-void supprProfAct(){
+void supprProfAct()
+{
     symb locTS = *ts;
     bool trouve = false;
     while (locTS.nom != NULL && !trouve)
     {
         printf("Suppression des variables avec profondeur : %d\n", prof);
-        if(prof == locTS.prof){
-            if(locTS.prev != NULL && locTS.next != NULL){
+        if (prof == locTS.prof)
+        {
+            if (locTS.prev != NULL && locTS.next != NULL)
+            {
                 locTS.prev->next = locTS.next;
                 locTS.next->prev = locTS.prev;
                 locTS = *(locTS.next);
-            }else if(locTS.prev != NULL){
+            }
+            else if (locTS.prev != NULL)
+            {
                 head = locTS.prev;
                 head->next = NULL;
                 free(locTS.prev->next);
                 trouve = true;
-            }else if(locTS.next != NULL){
+            }
+            else if (locTS.next != NULL)
+            {
                 ts = locTS.next;
                 free(locTS.next->prev);
                 locTS = *(locTS.next);
-            }else{
+            }
+            else
+            {
                 ts = NULL;
                 free(ts);
                 trouve = true;
             }
-            
-        } else{
-            if(locTS.next != NULL){
+        }
+        else
+        {
+            if (locTS.next != NULL)
+            {
                 locTS = *(locTS.next);
             }
-            else{
+            else
+            {
                 trouve = true;
             }
         }
-        
     }
 }
 
-void modifInit(char* nom)
+void modifInit(char *nom)
 {
     symb locTS = *ts;
     bool nontrouve = false;
     while (locTS.nom != NULL && !nontrouve)
-    {   
-        if(!strcmp(nom, locTS.nom)){
-            if(locTS.prev != NULL && locTS.next != NULL){
+    {
+        if (!strcmp(nom, locTS.nom))
+        {
+            if (locTS.prev != NULL && locTS.next != NULL)
+            {
                 locTS.next->prev->init = 1;
-            }else if(locTS.prev != NULL){
+            }
+            else if (locTS.prev != NULL)
+            {
                 locTS.prev->next->init = 1;
-            }else if(locTS.next != NULL){
+            }
+            else if (locTS.next != NULL)
+            {
                 locTS.next->prev->init = 1;
-            }else{
+            }
+            else
+            {
                 ts->init = 1;
             }
             nontrouve = true;
         }
-        else{
-            if(locTS.next != NULL){
+        else
+        {
+            if (locTS.next != NULL)
+            {
                 locTS = *(locTS.next);
             }
-            else{
+            else
+            {
                 nontrouve = true;
             }
         }
     }
 }
 
-void supprLast (){
-    symb * locTS = head->prev;
+void supprLast()
+{
+    symb *locTS = head->prev;
     free(head);
     head = locTS;
-    if(head == NULL){
+    if (head == NULL)
+    {
         ts = NULL;
-    }else{
+    }
+    else
+    {
         head->next = NULL;
     }
 }
 
-int getLast (){
+int getLast()
+{
     return head->index;
 }
 
-int getPreviousLast (){
+int getPreviousLast()
+{
     return head->prev->index;
 }
 
