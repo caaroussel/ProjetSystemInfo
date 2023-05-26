@@ -171,6 +171,8 @@ signal mul_mem1 : STD_LOGIC_VECTor (7 downto 0);
 -- signal ALU
 
 signal sortie_ALU : STD_LOGIC_VECTOR (7 downto 0);
+signal flag_N : STD_LOGIC;
+signal flag_Z : STD_LOGIC;
 
 -- signal data
 
@@ -188,6 +190,12 @@ signal ALEA : STD_LOGIC :='0';
 signal Gestion_ALEA : STD_LOGIC := '0';
 signal count_CLK : STD_LOGIC_VECTOR (1 downto 0):="00";
 
+
+-- signal jump 
+
+signal cond : STD_LOGIC;
+signal cond_remplie : STD_LOGIC;
+
 begin
 
 process
@@ -196,28 +204,42 @@ begin
     if rst = '0' then
             global_IP <= "00000000";
     elsif Gestion_ALEA ='0' then
-        global_IP <= (global_IP + "00000001");
+            global_IP <= (global_IP + "00000001");
+    elsif Gestion_ALEA='1' then 
+        if (cond_remplie = '1' and li_op="00001010") then
+            global_IP <= li_a;
+        elsif (cond_remplie = '0' and li_op="00001011")then
+            global_IP<=li_a;
+        end if;
     end if;
 end process;
 
 process
 begin 
     wait until CLK'Event and CLK='1';
-    if ALEA = '1' and alea_di='1' then
-        --Gestion_ALEA <= '1';
+    if (ALEA = '1' and alea_di='1') or (cond='1') then
         count_CLK<="10";
     elsif ALEA = '1' and alea_ex='1' then
-        --Gestion_ALEA <= '1';
         count_CLK<="01";
     end if;
-    if count_CLK="00" then
-        --Gestion_ALEA <='0';
-    else
+    if count_CLK/="00" then
         count_CLK <= (count_CLK - "01");
     end if;
 end process;
-        
-Gestion_ALEA <= '1' when ALEA = '1' or count_CLK/="00" else '0';  
+     
+cond<= '1' when di_op(7) = '1' else '0';     
+   
+Gestion_ALEA <= '1' when ALEA = '1' or count_CLK/="00" or cond='1' else '0';  
+
+
+--cond_remplie <= '1' when (mem_op="10000011" and flag_Z ='1'); --EQ
+--cond_remplie <= '1' when (mem_op="10010011" and flag_Z ='0'); --NE
+--cond_remplie <= '1' when (mem_op="10100011" and flag_N ='1'); --LT
+--cond_remplie <= '1' when (mem_op="10110011" and flag_N ='0'); --GT
+--cond_remplie <= '1' when (mem_op="11000011" and (flag_N ='1' or flag_Z='0')); --LE
+--cond_remplie <= '1' when (mem_op="11010011" and (flag_N ='0' or flag_Z='0')); --GE
+
+cond_remplie <= '1' when ((ex_op="10000011" and flag_Z ='1') or (ex_op="10010011" and flag_Z ='0') or (ex_op="10100011" and flag_N ='1') or (ex_op="10110011" and flag_N ='0') or (ex_op="11000011" and (flag_N ='1' or flag_Z='0')) or (ex_op="11010011" and (flag_N ='0' or flag_Z='0'))) else '0'; 
 
 pipeline_li_di : Pipeline Port map (
     A_in => li_a,
@@ -287,6 +309,12 @@ with di_op select
             di_b when "00000011", -- sou = "0x03"
             di_b when "00000111", -- LOAD = "0x07"
             di_b when "00001000", -- STORE = "0x08"
+            di_b when "10000011", -- EQ
+            di_b when "10010011", -- NE
+            di_b when "10100011", -- LT
+            di_b when "10110011", -- GT
+            di_b when "11000011", -- LE
+            di_b when "11010011", -- GE
             "00000000" when others;
 
 br_A_address <= di_b (3 downto 0);
@@ -304,6 +332,12 @@ with ex_op select
             sortie_ALU when "00000011", -- sou = "0x03"
             ex_b when "00000111", -- LOAD = "0x07"
             ex_b when "00001000", -- STORE = "0x08"
+            sortie_ALU when "10000011", -- EQ
+            sortie_ALU when "10010011", -- NE
+            sortie_ALU when "10100011", -- LT
+            sortie_ALU when "10110011", -- GT
+            sortie_ALU when "11000011", -- LE
+            sortie_ALU when "11010011", -- GE
             "00000000" when others;
    
 lc_ex <= ex_op (2 downto 0);
@@ -338,10 +372,10 @@ alu : UAL Port map(
         a => ex_b,
         b => ex_c,
         op => lc_ex,
-        result => sortie_ALU
-        --N : out STD_LOGIC;
+        result => sortie_ALU,
+        N => flag_N,
+        Z=> flag_Z
         --O : out STD_LOGIC;
-        --Z : out STD_LOGIC;
         --C : out STD_LOGIC
 );
 

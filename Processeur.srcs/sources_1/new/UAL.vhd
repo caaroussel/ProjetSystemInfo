@@ -61,7 +61,7 @@ begin
             when "010" =>
                 Aux <= a * b;
             when others =>
-                Aux <= (others => '0');
+                Aux<= "1000000000000000";
         end case;
         Result <= Aux(7 downto 0);
     end process;
