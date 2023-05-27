@@ -47,9 +47,9 @@ architecture Behavioral of Memoire_Donnee is
             type donnee_mem_t is array (natural range <>) of std_logic_vector(7 downto 0);
             signal mem : donnee_mem_t(0 to 1023) := (others => (others => '0'));
 begin
-    process
+    process 
     begin
-        wait until (CLK'Event and CLK = '1');
+        wait until (CLK'Event and CLK = '0');
         if(RST = '0') then
             mem <= (others => x"00");
         else

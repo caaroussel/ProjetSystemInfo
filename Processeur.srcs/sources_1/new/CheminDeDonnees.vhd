@@ -206,9 +206,9 @@ begin
     elsif Gestion_ALEA ='0' then
             global_IP <= (global_IP + "00000001");
     elsif Gestion_ALEA='1' then 
-        if (cond_remplie = '1' and li_op="00001010") then
+        if (li_op="00001010") then
             global_IP <= li_a;
-        elsif (cond_remplie = '0' and li_op="00001011")then
+        elsif (cond_remplie = '0' and li_op="00001011" and cond='0')then
             global_IP<=li_a;
         end if;
     end if;
@@ -217,20 +217,32 @@ end process;
 process
 begin 
     wait until CLK'Event and CLK='1';
-    if (ALEA = '1' and alea_di='1') or (cond='1') then
+    if (ALEA = '1' and alea_di='1')  then
         count_CLK<="10";
-    elsif ALEA = '1' and alea_ex='1' then
+    elsif (ALEA = '1' and alea_ex='1') or cond='1' then
         count_CLK<="01";
+
     end if;
     if count_CLK/="00" then
         count_CLK <= (count_CLK - "01");
     end if;
 end process;
      
-cond<= '1' when di_op(7) = '1' else '0';     
+cond<= '1' when di_op(7) = '1'  else '0';   
    
-Gestion_ALEA <= '1' when ALEA = '1' or count_CLK/="00" or cond='1' else '0';  
+Gestion_ALEA <= '1' when ALEA = '1' or count_CLK/="00" or cond='1' or li_op="00001010" else '0';  
 
+
+-- détection aléa
+
+read_li <= '1' when li_op="00000101" or li_op="00001000" or li_op="00000001" or li_op="00000010" or li_op="00000011" or li_op="10000011" or li_op="10010011" or li_op="10100011" or li_op="10110011" or li_op="11000011" or li_op="11010011" else '0';
+write_di <= '0' when di_op="00001000" else '1';
+write_ex <= '0' when ex_op="00001000" else '1';
+
+alea_di <= '1' when ((read_li='1' and write_di='1') and (li_b = di_a or li_c=di_a)) else '0';
+alea_ex <= '1' when ((read_li='1' and write_ex='1') and (li_b = ex_a or li_c=ex_a)) else '0';
+
+ALEA <= '1' when alea_di='1' or alea_ex='1' else '0';
 
 --cond_remplie <= '1' when (mem_op="10000011" and flag_Z ='1'); --EQ
 --cond_remplie <= '1' when (mem_op="10010011" and flag_Z ='0'); --NE
@@ -258,7 +270,7 @@ pipeline_li_di : Pipeline Port map (
 pipeline_di_ex : Pipeline Port map (
     A_in => di_a,
     B_in => mul_di,
-    C_in => di_c,
+    C_in => br_Qb,
     OP_in => di_op,
     A_out => ex_a,
     B_out => ex_b,
@@ -304,20 +316,21 @@ lc_re <= '1' when re_op = "00000110" or re_op = "00000101" or re_op = "00000111"
 with di_op select
     mul_di <= di_b when "00000110", -- afc = "0x06"
             br_QA when "00000101", -- cop = "0x05"
-            di_b when "00000001", -- add = "0x01"
-            di_b when "00000010", -- mul = "0x02"
-            di_b when "00000011", -- sou = "0x03"
+            br_QA when "00000001", -- add = "0x01"
+            br_QA when "00000010", -- mul = "0x02"
+            br_QA when "00000011", -- sou = "0x03"
             di_b when "00000111", -- LOAD = "0x07"
-            di_b when "00001000", -- STORE = "0x08"
-            di_b when "10000011", -- EQ
-            di_b when "10010011", -- NE
-            di_b when "10100011", -- LT
-            di_b when "10110011", -- GT
-            di_b when "11000011", -- LE
-            di_b when "11010011", -- GE
+            br_QA when "00001000", -- STORE = "0x08"
+            br_QA when "10000011", -- EQ
+            br_QA when "10010011", -- NE
+            br_QA when "10100011", -- LT
+            br_QA when "10110011", -- GT
+            br_QA when "11000011", -- LE
+            br_QA when "11010011", -- GE
             "00000000" when others;
 
 br_A_address <= di_b (3 downto 0);
+br_B_address <= di_c (3 downto 0);
 br_W_address <= re_a (3 downto 0);
 br_DATA <= re_b;
 br_W <= lc_re;
@@ -413,15 +426,6 @@ li_b <= mi_sortie(15 downto 8);
 li_c <= mi_sortie(7 downto 0);
 		
 
--- détection aléa
 
-read_li <= '1' when li_op="00000101" else '0';
-
-write_di <= '0' when di_op="00001000" else '1';
-write_ex <= '0' when ex_op="00001000" else '1';
-alea_di <= '1' when ((read_li='1' and write_di='1') and (li_b = di_a or li_c=di_a)) else '0';
-alea_ex <= '1' when ((read_li='1' and write_ex='1') and (li_b = ex_a or li_c=ex_a)) else '0';
-
-ALEA <= '1' when alea_di='1' or alea_ex='1' else '0';
 
 end Behavioral;
