@@ -33,6 +33,10 @@
         return tINT;
     } else if(strcmp(yytext, "void") == 0) {
         return tVOID;
+    } else if(strcmp(yytext, "main") == 0) {
+        return tMAIN;
+    } else if(strcmp(yytext, "const") == 0) {
+        return tCONST;
     } else {
         yylval.s = strdup(yytext);
         return tID;

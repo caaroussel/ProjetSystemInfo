@@ -131,7 +131,7 @@ void supprProfActInstr()
     bool trouve = false;
     while (locTI.nom != NULL && !trouve)
     {
-        printf("Suppression des variables avec profondeur : %d\n", prof);
+        // printf("Suppression des variables avec profondeur : %d\n", prof);
         if (prof == locTI.prof)
         {
             if (locTI.prev != NULL && locTI.next != NULL)
@@ -245,12 +245,14 @@ void modifNomInstr(instr *a, instr *nextInstr, int type)
     if (type == 0)
     {
         sprintf(result, " %d", nextInstr->index + 2);
-    }
-    else
-    {
+    } else if(type == 2){
+        sprintf(result, " %d", nextInstr->index + 1);
+    } else if(type == 3){
+        sprintf(result, " %d", nextInstr->index - 1);
+    } else {
         sprintf(result, " %d", nextInstr->index + 1);
     }
-    printf("Voici l'instruction suivante => %s\n", nextInstr->nom);
+    // printf("Voici l'instruction suivante => %s\n", nextInstr->nom);
     strcat(a->nom, result);
 }
 
@@ -269,6 +271,13 @@ void afficherInstr()
     }
 }
 
+int getLastIndex(){
+    if(headTi == NULL){
+        return 0;
+    }else{
+        return headTi->index + 1;
+    }
+}
 void writeInFile(char *nom)
 {
     FILE *file;

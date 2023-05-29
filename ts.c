@@ -138,7 +138,7 @@ void supprProfAct()
     bool trouve = false;
     while (locTS.nom != NULL && !trouve)
     {
-        printf("Suppression des variables avec profondeur : %d\n", prof);
+        // printf("Suppression des variables avec profondeur : %d\n", prof);
         if (prof == locTS.prof)
         {
             if (locTS.prev != NULL && locTS.next != NULL)

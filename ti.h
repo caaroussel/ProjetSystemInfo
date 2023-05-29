@@ -23,4 +23,6 @@ instr * getLastInstr ();
 char * getNameInstr(instr * instruction);
 void modifNomInstr(instr * a, instr * nextInstr, int type);
 void afficherInstr();
+void writeInFile(char *nom);
+int getLastIndex();
 #endif
