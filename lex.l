@@ -146,7 +146,7 @@
     return tCOMMA;
 }
 
-[ \t\n] {
+[ \t\n\r] {
     /* Ignoring whitespace */
 }
 

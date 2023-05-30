@@ -1,24 +1,23 @@
-int compute(int a, int d)
+int ajout(int a, int b)
 {
-    int b, c = a + d * 5;
-    b = a;
-    while (a > 0)
-    {
-        b = b + a * 4;
-        a = a - 1;
+    int c = 0;
+    int i = 3;
+    while(i > 0){
+        c = c + a * b;
+        i = i - 1;
     }
-    return b;
+    return c;
 }
 void main(void)
 {
-    int a;
+    int a = 2;
     if (a == 3)
     {
         print(a);
     }
     else
     {
-        int b = compute(2 * a, 5);
-        print(b);
+        int c = ajout(2 * a, 5);
+        print(c);
     }
 }

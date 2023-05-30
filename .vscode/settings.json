@@ -12,5 +12,9 @@
         "utility": "c",
         "variant": "c",
         "tn.h": "c"
-    }
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
 }

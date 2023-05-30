@@ -44,7 +44,6 @@
 %%
 
 Program:{
-    creationSymb("_",0);
     creationInstr("JMT", 0, 0);
     creationInstrVal(getLastInstr(), 0, "0notAfunc");
 } Declaration_list
@@ -136,7 +135,7 @@ Param: tINT tID {
         // printf("POP %d\n", getLast());
         char result[120];
         sprintf(result, "POP %d", getLast());
-        creationInstr(result, 0, 1);
+        creationInstr(result, 0, 0);
     }
     | /* empty */
      ;
@@ -209,7 +208,7 @@ Iteration_stmt: tWHILE tLPAR Simple_expression tRPAR {
     modifNomInstr(getLastInstrVal(0, "0notAfunc"), getLastInstr(), 0);
     // printf("%s\n", getNameInstr(getLastInstrVal(0, "0notAfunc")));
     char result[120];
-    sprintf(result, "JMT %d", getLastInstrValIndex(0, "0notAfunc")-7);
+    sprintf(result, "JMT %d", getLastInstrValIndex(0, "0notAfunc")-3);
     creationInstr(result, 0, 0);
     supprLastInstrVal(0, "0notAfunc");
 } {
@@ -232,7 +231,7 @@ Expression: Var tASSIGN Expression {
                 // printf("COP %d %d\n", recupSymb($1, prof), getLast());
                 char result[120];
                 sprintf(result, "COP %d %d", recupSymb($1, prof), getLast());
-                creationInstr(result, 0, 1);
+                creationInstr(result, 0, 0);
                 modifInit($1);
                 supprLast();
             }
@@ -245,42 +244,42 @@ Simple_expression: Additive_expression tLT Additive_expression {
                 // printf("LT %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
                 sprintf(result, "LT %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 2);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                  | Additive_expression tGT Additive_expression {
                 // printf("GT %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
                 sprintf(result, "GT %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 2);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                  | Additive_expression tLE Additive_expression {
                 // printf("LE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
                 sprintf(result, "LE %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 2);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                  | Additive_expression tGE Additive_expression {
                 // printf("GE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
                 sprintf(result, "GE %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 2);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                  | Additive_expression tEQ Additive_expression {
                 // printf("EQ %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
                 sprintf(result, "EQ %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 2);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                  | Additive_expression tNE Additive_expression {
                 // printf("NE %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[120];
                 sprintf(result, "NE %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 2);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                  | Additive_expression
@@ -290,14 +289,14 @@ Additive_expression: Additive_expression tADD Term {
                 // printf("ADD %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[20];
                 sprintf(result, "ADD %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 3);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                 | Additive_expression tSUB Term {
                 // printf("SUB %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[20];
                 sprintf(result, "SUB %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 3);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
                 | Term
@@ -307,14 +306,14 @@ Term: Term tMUL Factor {
                 // printf("MUL %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[20];
                 sprintf(result, "MUL %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 3);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
     | Term tDIV Factor {
                 // printf("DIV %d %d %d\n", getPreviousLast(), getPreviousLast(), getLast());
                 char result[20];
                 sprintf(result, "DIV %d %d %d", getPreviousLast(), getPreviousLast(), getLast());
-                creationInstr(result, 0, 3);
+                creationInstr(result, 0, 0);
                 supprLast();
             }
     | Factor
@@ -326,14 +325,14 @@ Factor: tLPAR Expression tRPAR
                 // printf("AFC %d %d\n", getLast(), $1);
                 char result[120];
                 sprintf(result, "AFC %d %d", getLast(), $1);
-                creationInstr(result, 0, 1);
+                creationInstr(result, 0, 0);
             }
       | Var {
                 creationSymb("_",1);
                 // printf("COP %d %d\n", getLast(), recupSymb($1, prof));
                 char result[120];
                 sprintf(result, "COP %d %d", getLast(), recupSymb($1, prof));
-                creationInstr(result, 0, 1);
+                creationInstr(result, 0, 0);
             }
       | Call
       ;
@@ -348,12 +347,13 @@ Call: tID {
         // printf("CALL %d %d\n", getFunctionDetailsAdresseDebut(getFunctionDetails($1)), getLast());
         char result2[120];
         sprintf(result2, "CALL %d %d", getFunctionDetailsAdresseDebut(getFunctionDetails($1)), getLast());
-        creationInstr(result2, 0, 2);
+        creationInstr(result2, 0, 0);
 
-        modifNomInstr(getLastInstrVal(1, $1), getLastInstr(), 3);
+        modifNomInstr(getLastInstrVal(1, $1), getLastInstr(), 2);
         // printf("%s\n", getNameInstr(getLastInstrVal(1, $1)));
         supprLastInstrVal(1, $1);
         modifFunctionDetails($1, getLastIndex());
+        creationInstr("NOP", 0, 0);
     }
     ;
 
@@ -393,11 +393,11 @@ int main(int argc, char **argv) {
         }
         yyin = file;
         yyparse();
-        writeInFile("output");
+        writeInFile("output_interpreteur");
         afficherInstr();
     } else{
         yyparse();
-        writeInFile("output");
+        writeInFile("output_interpreteur");
         afficherInstr();
     }
     return 0;
