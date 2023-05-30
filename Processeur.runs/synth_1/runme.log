@@ -1,6 +1,6 @@
 
 *** Running vivado
-    with args -log Memoire_Instruction.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Memoire_Instruction.tcl
+    with args -log CheminDeDonnees.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source CheminDeDonnees.tcl
 
 
 ****** Vivado v2018.2 (64-bit)
@@ -8,21 +8,141 @@
   **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
     ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 
-source Memoire_Instruction.tcl -notrace
-Command: synth_design -top Memoire_Instruction -part xc7a35tcpg236-1
+source CheminDeDonnees.tcl -notrace
+Command: synth_design -top CheminDeDonnees -part xc7a35tcpg236-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 13766 
+INFO: Helper process launched with PID 31203 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1255.266 ; gain = 83.699 ; free physical = 58665 ; free virtual = 70095
+Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1255.273 ; gain = 83.828 ; free physical = 10108 ; free virtual = 21519
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'Memoire_Instruction' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Instruction.vhd:40]
-INFO: [Synth 8-256] done synthesizing module 'Memoire_Instruction' (1#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Instruction.vhd:40]
-WARNING: [Synth 8-3331] design Memoire_Instruction has unconnected port CLK
+INFO: [Synth 8-638] synthesizing module 'CheminDeDonnees' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:43]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pipeline_li_di' of component 'Pipeline' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:259]
+INFO: [Synth 8-638] synthesizing module 'Pipeline' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:49]
+INFO: [Synth 8-256] done synthesizing module 'Pipeline' (1#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:49]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pipeline_di_ex' of component 'Pipeline' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:273]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pipeline_ex_mem' of component 'Pipeline' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:287]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pipeline_mem_re' of component 'Pipeline' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:301]
+INFO: [Synth 8-3491] module 'UAL' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/UAL.vhd:35' bound to instance 'alu' of component 'UAL' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:387]
+INFO: [Synth 8-638] synthesizing module 'UAL' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/UAL.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'UAL' (2#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/UAL.vhd:47]
+INFO: [Synth 8-3491] module 'Memoire_Donnee' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:34' bound to instance 'data' of component 'Memoire_Donnee' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:398]
+INFO: [Synth 8-638] synthesizing module 'Memoire_Donnee' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:46]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[256] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[257] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[258] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[259] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[260] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[261] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[262] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[263] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[264] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[265] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[266] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[267] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[268] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[269] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[270] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[271] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[272] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[273] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[274] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[275] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[276] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[277] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[278] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[279] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[280] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[281] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[282] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[283] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[284] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[285] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[286] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[287] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[288] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[289] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[290] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[291] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[292] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[293] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[294] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[295] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[296] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[297] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[298] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[299] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[300] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[301] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[302] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[303] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[304] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[305] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[306] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[307] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[308] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[309] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[310] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[311] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[312] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[313] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[314] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[315] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[316] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[317] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[318] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[319] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[320] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[321] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[322] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[323] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[324] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[325] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[326] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[327] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[328] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[329] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[330] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[331] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[332] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[333] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[334] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[335] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[336] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[337] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[338] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[339] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[340] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[341] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[342] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[343] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[344] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[345] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[346] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[347] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[348] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[349] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[350] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[351] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[352] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[353] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[354] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+WARNING: [Synth 8-6014] Unused sequential element mem_reg[355] was removed.  [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:54]
+INFO: [Common 17-14] Message 'Synth 8-6014' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-256] done synthesizing module 'Memoire_Donnee' (3#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Donnee.vhd:46]
+INFO: [Synth 8-3491] module 'BR' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:34' bound to instance 'registers' of component 'BR' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:408]
+INFO: [Synth 8-638] synthesizing module 'BR' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:46]
+WARNING: [Synth 8-614] signal 'mem' is read in the process but is not in the sensitivity list [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:53]
+INFO: [Synth 8-256] done synthesizing module 'BR' (4#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:46]
+INFO: [Synth 8-3491] module 'Memoire_Instruction' declared at '/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Instruction.vhd:34' bound to instance 'instructions' of component 'Memoire_Instruction' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:420]
+INFO: [Synth 8-638] synthesizing module 'Memoire_Instruction' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Instruction.vhd:39]
+INFO: [Synth 8-256] done synthesizing module 'Memoire_Instruction' (5#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/Memoire_Instruction.vhd:39]
+INFO: [Synth 8-256] done synthesizing module 'CheminDeDonnees' (6#1) [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:43]
+WARNING: [Synth 8-3331] design BR has unconnected port CLK
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1299.891 ; gain = 128.324 ; free physical = 58673 ; free virtual = 70105
+Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1314.898 ; gain = 143.453 ; free physical = 10101 ; free virtual = 21512
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -35,119 +155,180 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1299.891 ; gain = 128.324 ; free physical = 58675 ; free virtual = 70107
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1314.898 ; gain = 143.453 ; free physical = 10106 ; free virtual = 21518
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1299.891 ; gain = 128.324 ; free physical = 58675 ; free virtual = 70107
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1314.898 ; gain = 143.453 ; free physical = 10106 ; free virtual = 21518
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Compteur_8bits.xdc]
-WARNING: [Vivado 12-584] No ports matched 'Clock'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Compteur_8bits.xdc:1]
-CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports Clock]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Compteur_8bits.xdc:1]
-Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-Finished Parsing XDC File [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Compteur_8bits.xdc]
-Parsing XDC File [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc]
-WARNING: [Vivado 12-507] No nets matched 'Clock'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:9]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:9]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'Clock'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:10]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:10]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'Load'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:15]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:15]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'Enable'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:16]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:16]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'Rst'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:17]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:17]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'Sens'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:18]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:18]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[0]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:20]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:20]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[1]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:21]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:21]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[2]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:22]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:22]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[3]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:23]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:23]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[4]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:24]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:24]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[5]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:25]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:25]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[6]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:26]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:26]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_in[7]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:27]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:27]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[0]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:29]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:29]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[1]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:30]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:30]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[2]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:31]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:31]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[3]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:32]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:32]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[4]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:33]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:33]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[5]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:34]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:34]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[6]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:35]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:35]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'D_out[7]'. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:36]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc:36]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-Finished Parsing XDC File [/home/clrousse/4IR/ArchiMat/compteur/compteur.srcs/constrs_1/new/Pin_Compteur.xdc]
-Parsing XDC File [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/Memoire_Instruction.xdc]
-WARNING: [Vivado 12-584] No ports matched 'Clock'. [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/Memoire_Instruction.xdc:1]
-CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports Clock]'. [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/Memoire_Instruction.xdc:1]
-Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-Finished Parsing XDC File [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/Memoire_Instruction.xdc]
+Parsing XDC File [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/CheminDeDonnees.xdc]
+Finished Parsing XDC File [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/CheminDeDonnees.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/clrousse/4IR/Processeur/Processeur.srcs/constrs_1/new/CheminDeDonnees.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/CheminDeDonnees_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/CheminDeDonnees_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-WARNING: [Constraints 18-5210] No constraint will be written out.
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1564.773 ; gain = 0.000 ; free physical = 58399 ; free virtual = 69855
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1669.773 ; gain = 0.000 ; free physical = 9832 ; free virtual = 21244
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1564.773 ; gain = 393.207 ; free physical = 58464 ; free virtual = 69920
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:22 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9907 ; free virtual = 21319
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1564.773 ; gain = 393.207 ; free physical = 58464 ; free virtual = 69920
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:22 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9907 ; free virtual = 21319
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1564.773 ; gain = 393.207 ; free physical = 58466 ; free virtual = 69922
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:22 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9908 ; free virtual = 21320
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-5546] ROM "mem_reg[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[10]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[11]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[12]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[13]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[14]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[15]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[16]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[17]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[18]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[19]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[20]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[21]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[22]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[23]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[24]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[25]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[26]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[27]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[28]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[29]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[30]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[31]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[32]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[33]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[34]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[35]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[36]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[37]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[38]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[39]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[40]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[41]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[42]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[43]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[44]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[45]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[46]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[47]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[48]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[49]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[50]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[51]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[52]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[53]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[54]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[55]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[56]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[57]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[58]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[59]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[60]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[61]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[62]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[63]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[64]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[65]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[66]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[67]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[68]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[69]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[70]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[71]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[72]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[73]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[74]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[75]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[76]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[77]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[78]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[79]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[80]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[81]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[82]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[83]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[84]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[85]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[86]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[87]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[88]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[89]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[90]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[91]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[92]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[93]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[94]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[95]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[96]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[97]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[98]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mem_reg[99]" won't be mapped to RAM because it is too sparse
+INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-5544] ROM "mem_reg[0]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[1]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[2]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[3]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[4]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[5]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[6]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[7]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[8]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[9]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[10]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[11]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[12]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[13]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[14]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "mem_reg[15]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+WARNING: [Synth 8-327] inferring latch for variable 'SA_reg' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:61]
+WARNING: [Synth 8-327] inferring latch for variable 'SB_reg' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:62]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[0]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[1]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[2]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[3]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[4]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[5]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[6]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[7]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[8]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[9]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[10]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[11]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[12]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[13]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[14]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_reg[15]' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/BR.vhd:56]
+WARNING: [Synth 8-327] inferring latch for variable 'print_reg' [/home/clrousse/4IR/Processeur/Processeur.srcs/sources_1/new/CheminDeDonnees.vhd:255]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1564.773 ; gain = 393.207 ; free physical = 58465 ; free virtual = 69922
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:24 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9867 ; free virtual = 21281
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -159,6 +340,22 @@ Report RTL Partitions:
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     16 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 274   
+	                2 Bit    Registers := 1     
++---Muxes : 
+	   4 Input     16 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 3     
+	   8 Input      8 Bit        Muxes := 2     
+	   3 Input      8 Bit        Muxes := 2     
+	  14 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 274   
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -166,6 +363,42 @@ Finished RTL Component Statistics
 Start RTL Hierarchical Component Statistics 
 ---------------------------------------------------------------------------------
 Hierarchical RTL Component report 
+Module CheminDeDonnees 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 3     
+	   8 Input      8 Bit        Muxes := 2     
+	   3 Input      8 Bit        Muxes := 2     
+	  14 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module Pipeline 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 4     
+Module UAL 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     16 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
++---Muxes : 
+	   4 Input     16 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 1     
+Module Memoire_Donnee 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 257   
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 256   
+Module BR 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 16    
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -182,30 +415,145 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
-INFO: [Synth 8-5546] ROM "p_0_out" won't be mapped to RAM because it is too sparse
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[31] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[30] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[29] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[28] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[27] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[26] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[25] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[24] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[23] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[22] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[19] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[18] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[15] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[14] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[11] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[10] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[7] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[6] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[3] driven by constant 0
-WARNING: [Synth 8-3917] design Memoire_Instruction has port Sortie[2] driven by constant 0
-WARNING: [Synth 8-3331] design Memoire_Instruction has unconnected port CLK
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_C_out_reg[7]' (FDR) to 'pipeline_li_di/S_C_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_C_out_reg[6]' (FDR) to 'pipeline_li_di/S_C_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_C_out_reg[5]' (FDR) to 'pipeline_li_di/S_C_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_C_out_reg[4]' (FDR) to 'pipeline_li_di/S_C_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_C_out_reg[0]' (FDR) to 'pipeline_li_di/S_C_out_reg[3]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_C_out_reg[2]' (FDR) to 'pipeline_li_di/S_C_out_reg[3]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_B_out_reg[7]' (FDR) to 'pipeline_li_di/S_A_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_B_out_reg[6]' (FDR) to 'pipeline_li_di/S_B_out_reg[2]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_B_out_reg[5]' (FDR) to 'pipeline_li_di/S_A_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_B_out_reg[4]' (FDR) to 'pipeline_li_di/S_A_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_A_out_reg[6]' (FDR) to 'pipeline_li_di/S_A_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_A_out_reg[7]' (FDR) to 'pipeline_li_di/S_A_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_A_out_reg[5]' (FDR) to 'pipeline_li_di/S_OP_out_reg[6]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\pipeline_li_di/S_OP_out_reg[6] )
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_OP_out_reg[5]' (FDR) to 'pipeline_li_di/S_OP_out_reg[4]'
+INFO: [Synth 8-3886] merging instance 'pipeline_li_di/S_OP_out_reg[4]' (FDR) to 'pipeline_li_di/S_OP_out_reg[7]'
+INFO: [Synth 8-3886] merging instance 'pipeline_di_ex/S_OP_out_reg[7]' (FDR) to 'pipeline_di_ex/S_OP_out_reg[4]'
+INFO: [Synth 8-3886] merging instance 'pipeline_di_ex/S_OP_out_reg[5]' (FDR) to 'pipeline_di_ex/S_OP_out_reg[4]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\pipeline_ex_mem/S_A_out_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\pipeline_ex_mem/S_A_out_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\pipeline_ex_mem/S_A_out_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\pipeline_ex_mem/S_OP_out_reg[6] )
+INFO: [Synth 8-3886] merging instance 'pipeline_ex_mem/S_OP_out_reg[4]' (FDR) to 'pipeline_ex_mem/S_OP_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_ex_mem/S_OP_out_reg[5]' (FDR) to 'pipeline_ex_mem/S_OP_out_reg[7]'
+INFO: [Synth 8-3886] merging instance 'pipeline_mem_re/S_OP_out_reg[4]' (FDR) to 'pipeline_mem_re/S_OP_out_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pipeline_mem_re/S_OP_out_reg[5]' (FDR) to 'pipeline_mem_re/S_OP_out_reg[7]'
+WARNING: [Synth 8-3332] Sequential element (pipeline_di_ex/S_OP_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_di_ex/S_A_out_reg[7]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_di_ex/S_A_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_di_ex/S_A_out_reg[5]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_ex_mem/S_A_out_reg[7]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_ex_mem/S_A_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_ex_mem/S_A_out_reg[5]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_mem_re/S_A_out_reg[7]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_mem_re/S_A_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_mem_re/S_A_out_reg[5]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_mem_re/S_A_out_reg[4]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_ex_mem/S_OP_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_mem_re/S_OP_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (pipeline_li_di/S_OP_out_reg[6]) is unused and will be removed from module CheminDeDonnees.
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[64][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[65][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[66][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[67][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[68][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[69][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[70][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[71][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[72][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[73][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[74][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[75][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[76][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[77][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[78][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[79][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[92][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[93][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[94][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[95][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[88][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[89][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[90][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[91][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[80][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[81][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[82][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[83][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[84][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[85][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[86][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[87][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[120][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[121][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[122][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[123][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[124][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[125][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[126][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[127][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[112][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[113][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[114][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[115][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[116][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[117][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[118][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[119][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[104][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[105][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[106][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[107][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[108][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[109][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[110][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[111][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[100][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[101][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[102][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[103][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[96][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[97][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[98][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[99][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[48][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[49][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[50][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[51][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[52][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[53][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[54][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[55][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[56][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[57][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[58][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[59][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[60][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[61][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Synth 8-3886] merging instance 'data/mem_reg[62][0]' (FDRE_1) to 'data/mem_reg[255][0]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[179][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[39][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[151][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[151][3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[199][4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[151][5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[227][6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\data/mem_reg[211][7] )
+WARNING: [Synth 8-3332] Sequential element (pipeline_mem_re/S_OP_out_reg[2]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[179][0]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[39][1]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[151][2]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[151][3]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[199][4]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[151][5]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[227][6]) is unused and will be removed from module CheminDeDonnees.
+WARNING: [Synth 8-3332] Sequential element (data/mem_reg[211][7]) is unused and will be removed from module CheminDeDonnees.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:21 . Memory (MB): peak = 1564.773 ; gain = 393.207 ; free physical = 58443 ; free virtual = 69903
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:32 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9828 ; free virtual = 21247
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -231,13 +579,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:27 . Memory (MB): peak = 1591.773 ; gain = 420.207 ; free physical = 58311 ; free virtual = 69777
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:39 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9730 ; free virtual = 21149
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:27 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Timing Optimization : Time (s): cpu = 00:00:24 ; elapsed = 00:00:39 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9729 ; free virtual = 21148
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -249,7 +597,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:27 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Technology Mapping : Time (s): cpu = 00:00:24 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9728 ; free virtual = 21147
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -273,7 +621,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -286,7 +634,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -298,25 +646,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -329,42 +677,61 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+-----+------+
-|      |Cell |Count |
-+------+-----+------+
-|1     |LUT2 |     2|
-|2     |LUT3 |     3|
-|3     |LUT6 |     1|
-|4     |IBUF |     8|
-|5     |OBUF |    32|
-+------+-----+------+
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    16|
+|3     |LUT1   |     1|
+|4     |LUT2   |    48|
+|5     |LUT3   |    11|
+|6     |LUT4   |    42|
+|7     |LUT5   |    59|
+|8     |LUT6   |   238|
+|9     |MUXF7  |    48|
+|10    |MUXF8  |    16|
+|11    |FDRE   |   350|
+|12    |LD     |    24|
+|13    |LDC    |   128|
+|14    |IBUF   |     2|
+|15    |OBUF   |     8|
++------+-------+------+
 
 Report Instance Areas: 
-+------+---------+-------+------+
-|      |Instance |Module |Cells |
-+------+---------+-------+------+
-|1     |top      |       |    46|
-+------+---------+-------+------+
++------+------------------+---------------+------+
+|      |Instance          |Module         |Cells |
++------+------------------+---------------+------+
+|1     |top               |               |   992|
+|2     |  alu             |UAL            |    30|
+|3     |  data            |Memoire_Donnee |   371|
+|4     |  pipeline_di_ex  |Pipeline       |   144|
+|5     |  pipeline_ex_mem |Pipeline_0     |    99|
+|6     |  pipeline_li_di  |Pipeline_1     |    70|
+|7     |  pipeline_mem_re |Pipeline_2     |    34|
+|8     |  registers       |BR             |   208|
++------+------------------+---------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.773 ; gain = 421.207 ; free physical = 58311 ; free virtual = 69777
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9727 ; free virtual = 21146
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 21 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:08 ; elapsed = 00:00:12 . Memory (MB): peak = 1592.773 ; gain = 156.324 ; free physical = 58359 ; free virtual = 69826
-Synthesis Optimization Complete : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1592.781 ; gain = 421.207 ; free physical = 58375 ; free virtual = 69841
+Synthesis finished with 0 errors, 0 critical warnings and 44 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:24 . Memory (MB): peak = 1669.773 ; gain = 143.453 ; free physical = 9779 ; free virtual = 21198
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 1669.773 ; gain = 498.328 ; free physical = 9787 ; free virtual = 21206
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 8 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 234 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 152 instances were transformed.
+  LD => LDCE: 24 instances
+  LDC => LDCE: 128 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-14 Infos, 47 Warnings, 24 Critical Warnings and 0 Errors encountered.
+264 Infos, 144 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1638.789 ; gain = 478.977 ; free physical = 58347 ; free virtual = 69825
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:41 . Memory (MB): peak = 1677.781 ; gain = 517.961 ; free physical = 9774 ; free virtual = 21193
 WARNING: [Constraints 18-5210] No constraint will be written out.
-INFO: [Common 17-1381] The checkpoint '/home/clrousse/4IR/Processeur/Processeur.runs/synth_1/Memoire_Instruction.dcp' has been generated.
-INFO: [runtcl-4] Executing : report_utilization -file Memoire_Instruction_utilization_synth.rpt -pb Memoire_Instruction_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.11 . Memory (MB): peak = 1662.801 ; gain = 0.000 ; free physical = 58337 ; free virtual = 69816
-INFO: [Common 17-206] Exiting Vivado at Mon May 15 13:36:57 2023...
+INFO: [Common 17-1381] The checkpoint '/home/clrousse/4IR/Processeur/Processeur.runs/synth_1/CheminDeDonnees.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file CheminDeDonnees_utilization_synth.rpt -pb CheminDeDonnees_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.17 . Memory (MB): peak = 1701.793 ; gain = 0.000 ; free physical = 9765 ; free virtual = 21184
+INFO: [Common 17-206] Exiting Vivado at Tue May 30 17:41:31 2023...

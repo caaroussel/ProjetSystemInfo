@@ -36,8 +36,7 @@ entity CheminDeDonnees is
   Port ( 
         RST : in  std_logic;
         CLK : in  std_logic;
-        QA : out std_logic_vector(7 downto 0);
-        QB : out std_logic_vector(7 downto 0)
+        QA : out std_logic_vector(7 downto 0)
   );
 end CheminDeDonnees;
 
@@ -84,8 +83,7 @@ end Component;
 Component Memoire_Instruction
     Port(
         Sortie : out STD_LOGIC_VECTOR (31 downto 0);
-        Addr : in STD_LOGIC_VECTOR (7 downto 0);
-        CLK : in STD_LOGIC
+        Addr : in STD_LOGIC_VECTOR (7 downto 0)
     );
 end Component;  
 
@@ -196,6 +194,10 @@ signal count_CLK : STD_LOGIC_VECTOR (1 downto 0):="00";
 signal cond : STD_LOGIC;
 signal cond_remplie : STD_LOGIC;
 
+-- signal print 
+
+signal print : STD_LOGIC_VECTOR (7 downto 0);
+
 begin
 
 process
@@ -203,6 +205,8 @@ begin
     wait until CLK'Event and CLK='1';
     if rst = '0' then
             global_IP <= "00000000";
+    elsif global_IP=x"ff" then
+            global_IP<=x"ff";
     elsif Gestion_ALEA ='0' then
             global_IP <= (global_IP + "00000001");
     elsif Gestion_ALEA='1' then 
@@ -210,6 +214,7 @@ begin
             global_IP <= li_a;
         elsif (cond_remplie = '0' and li_op="00001011" and cond='0')then
             global_IP<=li_a;
+
         end if;
     end if;
 end process;
@@ -243,15 +248,13 @@ alea_di <= '1' when ((read_li='1' and write_di='1') and (li_b = di_a or li_c=di_
 alea_ex <= '1' when ((read_li='1' and write_ex='1') and (li_b = ex_a or li_c=ex_a)) else '0';
 
 ALEA <= '1' when alea_di='1' or alea_ex='1' else '0';
+cond_remplie <= '1' when ((ex_op="10000011" and flag_Z ='1') or (ex_op="10010011" and flag_Z ='0') or (ex_op="10100011" and flag_N ='1' and flag_Z='0') or (ex_op="10110011" and flag_N ='0' and flag_Z='0') or (ex_op="11000011" and (flag_N ='1' or flag_Z='1')) or (ex_op="11010011" and (flag_N ='0' or flag_Z='1'))) else '0'; 
 
---cond_remplie <= '1' when (mem_op="10000011" and flag_Z ='1'); --EQ
---cond_remplie <= '1' when (mem_op="10010011" and flag_Z ='0'); --NE
---cond_remplie <= '1' when (mem_op="10100011" and flag_N ='1'); --LT
---cond_remplie <= '1' when (mem_op="10110011" and flag_N ='0'); --GT
---cond_remplie <= '1' when (mem_op="11000011" and (flag_N ='1' or flag_Z='0')); --LE
---cond_remplie <= '1' when (mem_op="11010011" and (flag_N ='0' or flag_Z='0')); --GE
+-- print
 
-cond_remplie <= '1' when ((ex_op="10000011" and flag_Z ='1') or (ex_op="10010011" and flag_Z ='0') or (ex_op="10100011" and flag_N ='1') or (ex_op="10110011" and flag_N ='0') or (ex_op="11000011" and (flag_N ='1' or flag_Z='0')) or (ex_op="11010011" and (flag_N ='0' or flag_Z='0'))) else '0'; 
+print <= br_QA when li_op="00000111" and li_a="00001101";
+
+QA<= print;
 
 pipeline_li_di : Pipeline Port map (
     A_in => li_a,
@@ -416,7 +419,6 @@ registers : BR Port map (
 
 instructions : Memoire_Instruction Port map (
     Addr => global_IP,
-    CLK => CLK,
     Sortie => mi_sortie
 );
 

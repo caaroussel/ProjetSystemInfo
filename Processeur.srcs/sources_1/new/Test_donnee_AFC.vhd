@@ -74,7 +74,7 @@ begin
     wait for Clock_period/2;
 end process;
 
-S_RST <='0' after 0 ns, '1' after 100 ns ,'0' after 900 ns;
+S_RST <='0' after 0 ns, '1' after 50 ns;
 
 
 end Behavioral;

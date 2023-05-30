@@ -1,0 +1,122 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
+| Date         : Tue May 30 17:42:25 2023
+| Host         : insa-20425 running 64-bit Ubuntu 20.04.6 LTS
+| Command      : report_control_sets -verbose -file CheminDeDonnees_control_sets_placed.rpt
+| Design       : CheminDeDonnees
+| Device       : xc7a35t
+--------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    56 |
+| Unused register locations in slices containing registers |    12 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      4 |            2 |
+|     12 |            1 |
+|    16+ |           53 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              56 |           18 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |             408 |           75 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             540 |           79 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++---------------------------------------+-----------------------------------+------------------------------------+------------------+----------------+
+|              Clock Signal             |           Enable Signal           |          Set/Reset Signal          | Slice Load Count | Bel Load Count |
++---------------------------------------+-----------------------------------+------------------------------------+------------------+----------------+
+|  CLK_IBUF_BUFG                        |                                   |                                    |                1 |              4 |
+| ~CLK_IBUF_BUFG                        |                                   |                                    |                2 |              4 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/Data_out_reg[7]   | pipeline_ex_mem/Data_out_reg[0]    |                3 |             12 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[4][7][0]  | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[21][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[22][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[23][7][0] | data/SR[0]                         |                6 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[24][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[25][7][0] | data/SR[0]                         |                3 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[26][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[27][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[28][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[29][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[2][7][0]  | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[30][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[31][7][0] | data/SR[0]                         |                5 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[3][7][0]  | data/SR[0]                         |                1 |             16 |
+|  pipeline_li_di/D[0]                  |                                   |                                    |                4 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[5][7][0]  | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[6][7][0]  | data/SR[0]                         |                3 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[7][7][0]  | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[8][7][0]  | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[9][7][0]  | data/SR[0]                         |                7 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/E[0]              | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_0[0]  |                                   | data/SR[0]                         |                4 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_5[0]  |                                   | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_9[0]  |                                   | data/SR[0]                         |                4 |             16 |
+|  pipeline_mem_re/S_C_out_reg[0][0]    |                                   | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_C_out_reg[0]_0[0]  |                                   | data/SR[0]                         |                2 |             16 |
+|  CLK_IBUF_BUFG                        | pipeline_li_di/global_IP_reg[0]   | data/SR[0]                         |                4 |             16 |
+|  pipeline_mem_re/E[0]                 |                                   | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_6[0]  |                                   | data/SR[0]                         |                3 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_7[0]  |                                   | data/SR[0]                         |                4 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_8[0]  |                                   | data/SR[0]                         |                4 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_1[0]  |                                   | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_2[0]  |                                   | data/SR[0]                         |                3 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_10[0] |                                   | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_11[0] |                                   | data/SR[0]                         |                2 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_3[0]  |                                   | data/SR[0]                         |                3 |             16 |
+|  pipeline_mem_re/S_B_out_reg[0]_4[0]  |                                   | data/SR[0]                         |                3 |             16 |
+|  pipeline_mem_re/S_C_out_reg[7][0]    |                                   | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[20][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[10][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[11][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[12][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[13][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[14][7][0] | data/SR[0]                         |                3 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[15][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[16][7][0] | data/SR[0]                         |                4 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[17][7][0] | data/SR[0]                         |                2 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[18][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[19][7][0] | data/SR[0]                         |                1 |             16 |
+| ~CLK_IBUF_BUFG                        | pipeline_ex_mem/mem_reg[1][7][0]  | data/SR[0]                         |                3 |             16 |
+|  pipeline_mem_re/S_C_out_reg[0]_1[0]  |                                   |                                    |               11 |             32 |
+|  CLK_IBUF_BUFG                        |                                   | pipeline_li_di/S_OP_out[7]_i_1_n_0 |                7 |             32 |
+|  CLK_IBUF_BUFG                        |                                   | data/SR[0]                         |               24 |            120 |
++---------------------------------------+-----------------------------------+------------------------------------+------------------+----------------+
+
+
